@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stone Plast — Decorative PVC Marble Sheets</title>
+<meta name="description" content="Stone Plast manufactures fire-rated, antibacterial PVC marble sheets and accessories in Tehran, Iran. 90+ patterns and solid colors, full original sheet size.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          paper: '#F6F3EC',
+          ink: '#1B1A17',
+          stonedark: '#15181A',
+          teal: { DEFAULT: '#12857A', deep: '#0D5B54', pale: '#DCEEEB' },
+          brass: { DEFAULT: '#C79A46', light: '#E8D6AA' },
+          muted: '#75716A',
+        },
+        fontFamily: {
+          display: ['Fraunces', 'serif'],
+          sans: ['"Space Grotesk"', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { background: #F6F3EC; }
+
+  /* Corner-bracket frame motif, pulled from Stone Plast's own swatch-card branding */
+  .bracket-frame { position: relative; }
+  .bracket-frame::before,
+  .bracket-frame::after {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .bracket-frame::before {
+    top: -6px; left: -6px;
+    border-top: 3px solid #12857A;
+    border-left: 3px solid #12857A;
+  }
+  .bracket-frame::after {
+    bottom: -6px; right: -6px;
+    border-bottom: 3px solid #12857A;
+    border-right: 3px solid #12857A;
+  }
+  .bracket-frame-inner {
+    border: 1px solid rgba(199,154,70,0.45);
+    transition: border-color .4s ease;
+  }
+
+  .bracket-sm::before, .bracket-sm::after { width: 14px; height: 14px; }
+
+  .code-chip {
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-blur {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .chip-btn[aria-pressed="true"] {
+    background: #15181A;
+    color: #F6F3EC;
+    border-color: #15181A;
+  }
+
+  /* Hover interaction: image zoom + border brightening, no drop-shadow */
+  .sample-card { transition: transform .5s cubic-bezier(0.16, 1, 0.3, 1); }
+  .sample-card:hover { transform: translateY(-4px); }
+  .sample-card:hover .bracket-frame-inner { border-color: #C79A46; }
+  .sample-img {
+    transition: transform .7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+  .sample-card:hover .sample-img { transform: scale(1.045); }
+
+  .hero-img {
+    transition: transform .8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hero-frame:hover .hero-img { transform: scale(1.03); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .sample-card, .chip-btn, .sample-img, .hero-img { transition: none !important; }
+  }
+
+  ::selection { background: #C79A46; color: #15181A; }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid #12857A;
+    outline-offset: 2px;
+  }
+</style>
+</head>
+
+<body class="font-sans text-ink antialiased">
+
+<!-- ============ NAV ============ -->
+<header id="top" class="fixed top-0 inset-x-0 z-50 nav-blur bg-paper/85 border-b border-stonedark/10">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2 shrink-0">
+      <span class="font-display text-xl sm:text-2xl tracking-tight text-stonedark">Stone<span class="text-teal">·</span>Plast</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8 text-sm text-ink/80">
+      <a href="#products" class="hover:text-teal transition-colors">Collection</a>
+      <a href="#assurance" class="hover:text-teal transition-colors">Certifications</a>
+      <a href="#why" class="hover:text-teal transition-colors">Why Stone Plast</a>
+      <a href="#contact" class="hover:text-teal transition-colors">Contact</a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href="tel:02138992" class="hidden sm:inline-flex items-center gap-2 bg-stonedark text-paper text-sm font-medium px-4 py-2.5 border border-stonedark hover:bg-teal hover:border-teal transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call now
+      </a>
+      <button id="menuBtn" aria-label="Open menu" aria-expanded="false" class="md:hidden p-2 -mr-2 text-stonedark">
+        <svg id="menuIconOpen" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg id="menuIconClose" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="hidden"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobileMenu" class="hidden md:hidden border-t border-stonedark/10 bg-paper px-5 py-4 space-y-3 text-sm">
+    <a href="#products" class="block py-1.5">Collection</a>
+    <a href="#assurance" class="block py-1.5">Certifications</a>
+    <a href="#why" class="block py-1.5">Why Stone Plast</a>
+    <a href="#contact" class="block py-1.5">Contact</a>
+    <a href="tel:02138992" class="mt-2 inline-flex items-center gap-2 bg-stonedark text-paper text-sm font-medium px-4 py-2.5 border border-stonedark">Call 021 38992</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="pt-32 pb-20 sm:pt-40 sm:pb-28 px-5 sm:px-8 max-w-7xl mx-auto">
+  <div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+
+    <div class="lg:col-span-6">
+      <p class="text-sm text-muted mb-5 tracking-wide">PVC Marble Sheets &amp; Accessories · Tehran, Iran</p>
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.08] text-stonedark">
+        Marble&rsquo;s look, without marble&rsquo;s weight or upkeep.
+      </h1>
+      <p class="mt-6 text-lg text-ink/75 leading-relaxed max-w-lg">
+        Stone Plast manufactures decorative PVC marble sheeting in full original size &mdash; fire-rated, antibacterial, and cut from a working range of more than 90 patterns and solid colors.
+      </p>
+
+      <div class="mt-9 flex flex-wrap items-center gap-4">
+        <a href="tel:02138992" class="inline-flex items-center gap-2 bg-teal text-white font-medium px-6 py-3.5 border border-teal hover:bg-teal-deep hover:border-teal-deep transition-colors">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          021 38992
+        </a>
+        <a href="#products" class="inline-flex items-center gap-2 border border-stonedark/30 text-stonedark font-medium px-6 py-3.5 hover:border-stonedark transition-colors">
+          Browse the collection
+        </a>
+      </div>
+
+      <dl class="mt-12 grid grid-cols-3 gap-6 max-w-md border-t border-stonedark/15 pt-6">
+        <div>
+          <dt class="text-2xl font-display text-stonedark">90+</dt>
+          <dd class="text-xs text-muted mt-1">Patterns &amp; colors</dd>
+        </div>
+        <div>
+          <dt class="text-2xl font-display text-stonedark">3.2mm</dt>
+          <dd class="text-xs text-muted mt-1">Average thickness</dd>
+        </div>
+        <div>
+          <dt class="text-2xl font-display text-stonedark">B&#8209;s2,d0</dt>
+          <dd class="text-xs text-muted mt-1">Fire class, EN 13501&#8209;1</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="lg:col-span-6 relative">
+      <div class="relative h-[420px] sm:h-[480px] lg:h-[540px]">
+        <div class="hero-frame bracket-frame absolute w-[62%] top-0 left-0 overflow-hidden">
+          <img src="images/product-63.jpg" alt="Stone Plast amber and copper marble-pattern PVC sheet sample, code DF-90533-A" class="hero-img w-full h-full object-cover bracket-frame-inner">
+        </div>
+        <div class="hero-frame bracket-frame absolute w-[52%] bottom-0 right-0 overflow-hidden">
+          <img src="images/product-08.jpg" alt="Stone Plast black marble-pattern PVC sheet sample with white veining, code DF-1426-E" class="hero-img w-full h-full object-cover bracket-frame-inner">
+        </div>
+        <div class="absolute bottom-6 left-2 bg-paper border border-brass/40 px-4 py-3 hidden sm:block">
+          <p class="text-xs text-muted">Actual sheet finish</p>
+          <p class="text-sm font-medium text-stonedark">Photographed, not rendered</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ ASSURANCE / CERTIFICATIONS ============ -->
+<section id="assurance" class="bg-stonedark text-paper py-20 sm:py-28 px-5 sm:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="max-w-2xl">
+      <h2 class="font-display text-3xl sm:text-4xl leading-tight">Tested, and paperwork to prove it</h2>
+      <p class="mt-4 text-paper/70 leading-relaxed">Every Stone Plast sheet is produced to the same specification that went through independent testing &mdash; not just a marketing claim.</p>
+    </div>
+
+    <div class="mt-14 grid lg:grid-cols-12 border-t border-l border-paper/15">
+
+      <div class="lg:col-span-7 border-r border-b border-paper/15 p-8 sm:p-10 flex flex-col justify-between">
+        <div>
+          <p class="code-chip text-xs text-brass mb-6">EN 13501&#8209;1</p>
+          <h3 class="font-display text-2xl sm:text-3xl leading-snug max-w-md">Fire class B&#8209;s2,d0</h3>
+        </div>
+        <p class="text-sm text-paper/65 leading-relaxed max-w-md mt-8">Reaction-to-fire classified under EN 13501&#8209;1 and Iranian National Standard 8299&#8209;1 by the Road, Housing &amp; Urban Development Research Center.</p>
+      </div>
+
+      <div class="lg:col-span-5 border-b border-paper/15 p-8 sm:p-10 flex flex-col justify-between">
+        <div>
+          <p class="code-chip text-xs text-brass mb-6">ATCC 25922</p>
+          <h3 class="font-display text-2xl sm:text-3xl leading-snug">Antibacterial surface</h3>
+        </div>
+        <p class="text-sm text-paper/65 leading-relaxed mt-8">Pasteur Institute of Iran testing recorded over 99.9% bacterial reduction after 24 hours of surface contact.</p>
+      </div>
+
+      <div class="lg:col-span-12 border-b border-paper/15 p-8 sm:p-10">
+        <p class="code-chip text-xs text-brass mb-6">Sheet specification</p>
+        <div class="grid sm:grid-cols-3 gap-8 sm:gap-6">
+          <div class="flex items-baseline justify-between sm:flex-col sm:items-start gap-1 border-t border-paper/15 pt-4">
+            <span class="text-sm text-paper/65">Avg. thickness</span>
+            <span class="font-display text-2xl text-paper">3.2 mm</span>
+          </div>
+          <div class="flex items-baseline justify-between sm:flex-col sm:items-start gap-1 border-t border-paper/15 pt-4">
+            <span class="text-sm text-paper/65">Avg. density</span>
+            <span class="font-display text-2xl text-paper">1,985.9 kg/m&sup3;</span>
+          </div>
+          <div class="flex items-baseline justify-between sm:flex-col sm:items-start gap-1 border-t border-paper/15 pt-4">
+            <span class="text-sm text-paper/65">Surface weight</span>
+            <span class="font-display text-2xl text-paper">6.4 kg/m&sup2;</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUCTS ============ -->
+<section id="products" class="py-20 sm:py-28 px-5 sm:px-8 max-w-7xl mx-auto">
+  <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
+    <div class="max-w-xl">
+      <h2 class="font-display text-3xl sm:text-4xl leading-tight text-stonedark">A pattern for every room</h2>
+      <p class="mt-4 text-ink/70 leading-relaxed">From deep black-and-gold veining to solid studio colors, these are a sample of the 90+ designs currently in production. Sheets ship in full original size.</p>
+    </div>
+
+    <div class="flex flex-wrap gap-2" role="group" aria-label="Filter the collection">
+      <button type="button" data-filter="all" aria-pressed="true" class="chip-btn px-4 py-2 text-sm border border-stonedark/25 transition-colors">All designs</button>
+      <button type="button" data-filter="pattern" aria-pressed="false" class="chip-btn px-4 py-2 text-sm border border-stonedark/25 transition-colors">Marble &amp; stone</button>
+      <button type="button" data-filter="solid" aria-pressed="false" class="chip-btn px-4 py-2 text-sm border border-stonedark/25 transition-colors">Solid colors</button>
+    </div>
+  </div>
+
+  <div id="productGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+    <!-- Cards injected below -->
+  </div>
+
+  <div class="mt-16 bracket-frame bracket-sm border border-brass/30 px-6 py-8 sm:px-10 sm:py-9 flex flex-col sm:flex-row items-center justify-between gap-6">
+    <div>
+      <h3 class="font-display text-xl text-stonedark">This is a sample of the range</h3>
+      <p class="text-sm text-ink/70 mt-1.5">80+ additional patterns and colors are available in the full sample book &mdash; call or write in and we&rsquo;ll send options for your project.</p>
+    </div>
+    <a href="#contact" class="shrink-0 inline-flex items-center gap-2 bg-stonedark text-paper font-medium px-6 py-3 border border-stonedark hover:bg-teal hover:border-teal transition-colors">Request the sample book</a>
+  </div>
+</section>
+
+<!-- ============ WHY STONE PLAST ============ -->
+<section id="why" class="bg-white border-y border-stonedark/10 py-20 sm:py-28 px-5 sm:px-8">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12">
+    <div class="lg:col-span-4">
+      <h2 class="font-display text-3xl sm:text-4xl leading-tight text-stonedark">Built for real installations</h2>
+      <p class="mt-4 text-ink/70 leading-relaxed">PVC marble sheeting solves problems natural stone can&rsquo;t &mdash; without giving up the finish people actually want.</p>
+    </div>
+
+    <div class="lg:col-span-8 grid sm:grid-cols-2 gap-x-10 gap-y-10">
+      <div class="flex gap-4 border-t border-brass/40 pt-5">
+        <div>
+          <h3 class="font-display text-lg leading-snug text-stonedark mb-1.5">Roughly a quarter lighter</h3>
+          <p class="text-sm text-ink/65 leading-relaxed">At an average density of 1,985.9 kg/m&sup3;, Stone Plast sheeting is markedly lighter than natural marble slab, easing handling, framing loads and shipping.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 border-t border-brass/40 pt-5">
+        <div>
+          <h3 class="font-display text-lg leading-snug text-stonedark mb-1.5">Moisture-resistant PVC core</h3>
+          <p class="text-sm text-ink/65 leading-relaxed">Unlike porous natural stone, the PVC base doesn&rsquo;t need sealing against everyday moisture &mdash; suited to kitchens, bathrooms and wet areas.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 border-t border-brass/40 pt-5">
+        <div>
+          <h3 class="font-display text-lg leading-snug text-stonedark mb-1.5">Full original-size sheets</h3>
+          <p class="text-sm text-ink/65 leading-relaxed">Panels are produced at full sheet size rather than small tiles, giving fewer seams and faster coverage across walls and surfaces.</p>
+        </div>
+      </div>
+      <div class="flex gap-4 border-t border-brass/40 pt-5">
+        <div>
+          <h3 class="font-display text-lg leading-snug text-stonedark mb-1.5">One supplier, one showroom</h3>
+          <p class="text-sm text-ink/65 leading-relaxed">Marble and stone patterns, solid studio colors, and matching accessories are manufactured and sourced through a single Tehran-based facility.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="py-20 sm:py-28 px-5 sm:px-8 max-w-7xl mx-auto">
+  <div class="grid lg:grid-cols-12 gap-12">
+
+    <div class="lg:col-span-5">
+      <h2 class="font-display text-3xl sm:text-4xl leading-tight text-stonedark">Talk to Stone Plast</h2>
+      <p class="mt-4 text-ink/70 leading-relaxed max-w-md">Call the numbers below for pricing, samples or project quantities &mdash; every line is answered from our Tehran office.</p>
+
+      <div class="mt-9 space-y-5">
+        <a href="tel:02138992" class="flex items-center gap-4 group">
+          <span class="w-11 h-11 border border-teal-deep/40 flex items-center justify-center text-teal-deep shrink-0">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          <span>
+            <span class="block text-stonedark font-medium group-hover:text-teal transition-colors">021 38992</span>
+            <span class="block text-xs text-muted">Main line</span>
+          </span>
+        </a>
+        <a href="tel:02122537365" class="flex items-center gap-4 group">
+          <span class="w-11 h-11 border border-teal-deep/40 flex items-center justify-center text-teal-deep shrink-0">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          <span>
+            <span class="block text-stonedark font-medium group-hover:text-teal transition-colors">021 2253 7365</span>
+            <span class="block text-xs text-muted">Sales</span>
+          </span>
+        </a>
+        <a href="tel:02126142420" class="flex items-center gap-4 group">
+          <span class="w-11 h-11 border border-teal-deep/40 flex items-center justify-center text-teal-deep shrink-0">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          <span>
+            <span class="block text-stonedark font-medium group-hover:text-teal transition-colors">021 2614 2420</span>
+            <span class="block text-xs text-muted">Sales</span>
+          </span>
+        </a>
+
+        <div class="flex items-start gap-4 pt-2">
+          <span class="w-11 h-11 border border-teal-deep/40 flex items-center justify-center text-teal-deep shrink-0">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          <span class="text-sm text-ink/75 leading-relaxed pt-2">
+            <span class="block text-stonedark font-medium">Shenzar Industrial Zone, Tehran</span>
+            Production facility
+          </span>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="w-11 h-11 border border-teal-deep/40 flex items-center justify-center text-teal-deep shrink-0">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          <span class="text-sm text-ink/75 leading-relaxed pt-2">
+            <span class="block text-stonedark font-medium">South Ostad Hasan Banna St, Tehran</span>
+            Sales office
+          </span>
+        </div>
+        <a href="https://stoneplast.ir" target="_blank" rel="noopener" class="flex items-center gap-4 group">
+          <span class="w-11 h-11 border border-teal-deep/40 flex items-center justify-center text-teal-deep shrink-0">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </span>
+          <span class="block text-stonedark font-medium group-hover:text-teal transition-colors">stoneplast.ir</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="lg:col-span-7">
+      <form id="contactForm" class="bracket-frame bracket-sm bg-white border border-stonedark/15 p-7 sm:p-10 space-y-5">
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label for="name" class="block text-sm font-medium text-stonedark mb-1.5">Name</label>
+            <input id="name" name="name" type="text" required class="w-full border border-stonedark/20 px-4 py-2.5 text-sm focus:border-teal outline-none">
+          </div>
+          <div>
+            <label for="phone" class="block text-sm font-medium text-stonedark mb-1.5">Phone</label>
+            <input id="phone" name="phone" type="tel" required class="w-full border border-stonedark/20 px-4 py-2.5 text-sm focus:border-teal outline-none">
+          </div>
+        </div>
+        <div>
+          <label for="interest" class="block text-sm font-medium text-stonedark mb-1.5">Interested in</label>
+          <select id="interest" name="interest" class="w-full border border-stonedark/20 px-4 py-2.5 text-sm focus:border-teal outline-none bg-white">
+            <option>Marble &amp; stone patterns</option>
+            <option>Solid colors</option>
+            <option>Accessories &amp; trims</option>
+            <option>Full sample book</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div>
+          <label for="message" class="block text-sm font-medium text-stonedark mb-1.5">Message</label>
+          <textarea id="message" name="message" rows="4" required class="w-full border border-stonedark/20 px-4 py-2.5 text-sm focus:border-teal outline-none" placeholder="Tell us about the project — surface area, location, timeline."></textarea>
+        </div>
+        <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-teal text-white font-medium px-7 py-3.5 border border-teal hover:bg-teal-deep hover:border-teal-deep transition-colors">
+          Send message
+        </button>
+        <p class="text-xs text-muted">Sending opens your email app addressed to info@stoneplast.ir with these details filled in.</p>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-stonedark text-paper/70 pt-16 pb-8 px-5 sm:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-paper/10">
+      <div class="lg:col-span-2">
+        <span class="font-display text-2xl text-paper">Stone<span class="text-teal">·</span>Plast</span>
+        <p class="mt-4 text-sm leading-relaxed max-w-sm">Decorative PVC marble sheets and accessories, manufactured by Baspar Shimi Shahin Co. in Tehran, Iran.</p>
+      </div>
+      <div>
+        <h4 class="text-sm font-medium text-paper mb-4">Site</h4>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="#products" class="hover:text-teal transition-colors">Collection</a></li>
+          <li><a href="#assurance" class="hover:text-teal transition-colors">Certifications</a></li>
+          <li><a href="#why" class="hover:text-teal transition-colors">Why Stone Plast</a></li>
+          <li><a href="#contact" class="hover:text-teal transition-colors">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-sm font-medium text-paper mb-4">Contact</h4>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="tel:02138992" class="hover:text-teal transition-colors">021 38992</a></li>
+          <li><a href="tel:02122537365" class="hover:text-teal transition-colors">021 2253 7365</a></li>
+          <li><a href="https://stoneplast.ir" target="_blank" rel="noopener" class="hover:text-teal transition-colors">stoneplast.ir</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pt-6 flex flex-col sm:flex-row justify-between gap-3 text-xs text-paper/50">
+      <p>&copy; <span id="year"></span> Stone Plast — Baspar Shimi Shahin Co. All rights reserved.</p>
+      <p>Shenzar Industrial Zone · South Ostad Hasan Banna St, Tehran</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const iconOpen = document.getElementById('menuIconOpen');
+  const iconClose = document.getElementById('menuIconClose');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = !mobileMenu.classList.contains('hidden');
+    mobileMenu.classList.toggle('hidden');
+    iconOpen.classList.toggle('hidden');
+    iconClose.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(!isOpen));
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+    iconOpen.classList.remove('hidden');
+    iconClose.classList.add('hidden');
+  }));
+
+  // Product data — code, category, name, image
+  const PRODUCTS = [
+    { code: 'DF-1426-E', name: 'Noir Vein', cat: 'pattern', img: 'images/product-08.jpg' },
+    { code: 'DF-1445-B', name: 'Canyon Rose', cat: 'pattern', img: 'images/product-10.jpg' },
+    { code: 'DF-1446-A', name: 'Alpine White', cat: 'pattern', img: 'images/product-13.jpg' },
+    { code: 'DF-1448-A', name: 'Golden Sand', cat: 'pattern', img: 'images/product-15.jpg' },
+    { code: 'DF-1450-D', name: 'Storm Grey', cat: 'pattern', img: 'images/product-17.jpg' },
+    { code: 'DF-1451-A', name: 'Ivory Gold', cat: 'pattern', img: 'images/product-20.jpg' },
+    { code: 'DF-1457-A', name: 'Arctic Blue', cat: 'pattern', img: 'images/product-26.jpg' },
+    { code: 'DF-2833-E', name: 'Olive Stone', cat: 'pattern', img: 'images/product-45.jpg' },
+    { code: 'DF-2835-I', name: 'Midnight Navy', cat: 'pattern', img: 'images/product-49.jpg' },
+    { code: 'DF-2857-A', name: 'Onyx Gold', cat: 'pattern', img: 'images/product-54.jpg' },
+    { code: 'DF-90533-A', name: 'Amber Fire', cat: 'pattern', img: 'images/product-63.jpg' },
+    { code: 'YF-9962', name: 'Lagoon Gold', cat: 'pattern', img: 'images/product-80.jpg' },
+    { code: 'YF-9966', name: 'Turquoise Vein', cat: 'pattern', img: 'images/product-82.jpg' },
+    { code: '1010', name: 'Sandstone', cat: 'solid', img: 'images/product-84.jpg' },
+    { code: '1010-1', name: 'Sage Mint', cat: 'solid', img: 'images/product-85.jpg' },
+    { code: '1010-2', name: 'Sky', cat: 'solid', img: 'images/product-86.jpg' },
+    { code: '1010-7', name: 'Cardinal Red', cat: 'solid', img: 'images/product-91.jpg' },
+    { code: '1010-9', name: 'Forest Green', cat: 'solid', img: 'images/product-92.jpg' },
+  ];
+
+  const grid = document.getElementById('productGrid');
+  function renderProducts(filter) {
+    grid.innerHTML = '';
+    PRODUCTS.filter(p => filter === 'all' || p.cat === filter).forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'sample-card bracket-frame bracket-sm';
+      card.innerHTML = `
+        <div class="bracket-frame-inner aspect-[4/5] overflow-hidden bg-stonedark/5">
+          <img src="${p.img}" alt="${p.name} — Stone Plast PVC marble sheet, code ${p.code}" loading="lazy" class="sample-img w-full h-full object-cover">
+        </div>
+        <div class="flex items-center justify-between pt-3">
+          <div>
+            <p class="text-sm font-medium text-stonedark">${p.name}</p>
+            <p class="code-chip text-xs text-muted">${p.code}</p>
+          </div>
+          <a href="tel:02138992" aria-label="Call about ${p.name}" class="text-teal-deep hover:text-teal">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+  renderProducts('all');
+
+  document.querySelectorAll('.chip-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.chip-btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
+      renderProducts(btn.dataset.filter);
+    });
+  });
+
+  // Contact form -> mailto
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const interest = document.getElementById('interest').value;
+    const message = document.getElementById('message').value;
+    const subject = encodeURIComponent('Website inquiry — ' + interest);
+    const body = encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nInterested in: ${interest}\n\n${message}`);
+    window.location.href = `mailto:info@stoneplast.ir?subject=${subject}&body=${body}`;
+  });
+</script>
+
+</body>
+</html>

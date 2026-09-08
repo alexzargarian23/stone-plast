@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stone Plast — Decorative PVC Marble Sheets</title>
-<meta name="description" content="Stone Plast manufactures fire-rated, antibacterial PVC marble sheets and accessories in Tehran, Iran. 90+ patterns and solid colors, full original sheet size.">
+<meta name="description" content="Stone Plast manufactures fire-rated, antibacterial PVC marble sheets and accessories in Tehran, Iran. Explore 90+ patterns, compare against natural stone, and request samples.">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,8 +36,9 @@
 <style>
   html { scroll-behavior: smooth; }
   body { background: #F6F3EC; }
+  @media (min-width: 1024px) { body.drawer-open, body.modal-open { overflow: hidden; } }
 
-  /* Corner-bracket frame motif, pulled from Stone Plast's own swatch-card branding */
+  /* Corner-bracket frame motif */
   .bracket-frame { position: relative; }
   .bracket-frame::before,
   .bracket-frame::after {
@@ -48,64 +49,81 @@
     pointer-events: none;
     z-index: 10;
   }
-  .bracket-frame::before {
-    top: -6px; left: -6px;
-    border-top: 3px solid #12857A;
-    border-left: 3px solid #12857A;
-  }
-  .bracket-frame::after {
-    bottom: -6px; right: -6px;
-    border-bottom: 3px solid #12857A;
-    border-right: 3px solid #12857A;
-  }
-  .bracket-frame-inner {
-    border: 1px solid rgba(199,154,70,0.45);
-    transition: border-color .4s ease;
-  }
-
+  .bracket-frame::before { top: -6px; left: -6px; border-top: 3px solid #12857A; border-left: 3px solid #12857A; }
+  .bracket-frame::after { bottom: -6px; right: -6px; border-bottom: 3px solid #12857A; border-right: 3px solid #12857A; }
+  .bracket-frame-inner { border: 1px solid rgba(199,154,70,0.45); transition: border-color .4s ease; }
   .bracket-sm::before, .bracket-sm::after { width: 14px; height: 14px; }
 
-  .code-chip {
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.02em;
-  }
+  .code-chip { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.02em; }
+  .nav-blur { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .chip-btn[aria-pressed="true"] { background: #15181A; color: #F6F3EC; border-color: #15181A; }
+  .tab-btn[aria-selected="true"] { background: #15181A; color: #F6F3EC; border-color: #15181A; }
 
-  .nav-blur {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-
-  .chip-btn[aria-pressed="true"] {
-    background: #15181A;
-    color: #F6F3EC;
-    border-color: #15181A;
-  }
-
-  /* Hover interaction: image zoom + border brightening, no drop-shadow */
-  .sample-card { transition: transform .5s cubic-bezier(0.16, 1, 0.3, 1); }
+  .sample-card { transition: transform .5s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; text-align: left; }
   .sample-card:hover { transform: translateY(-4px); }
   .sample-card:hover .bracket-frame-inner { border-color: #C79A46; }
-  .sample-img {
-    transition: transform .7s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform;
-  }
+  .sample-img { transition: transform .7s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform; }
   .sample-card:hover .sample-img { transform: scale(1.045); }
 
-  .hero-img {
-    transition: transform .8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
+  .hero-img { transition: transform .8s cubic-bezier(0.16, 1, 0.3, 1); }
   .hero-frame:hover .hero-img { transform: scale(1.03); }
+
+  /* Overlays / drawers */
+  .overlay { position: fixed; inset: 0; z-index: 70; }
+  .overlay-scrim { position: absolute; inset: 0; background: rgba(21,24,26,0.72); }
+  .overlay[hidden] { display: none; }
+
+  .drawer-panel {
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: 100%; max-width: 30rem;
+    background: #F6F3EC;
+    border-left: 1px solid rgba(21,24,26,0.15);
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform .45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .overlay.is-open .drawer-panel { transform: translateX(0); }
+
+  .modal-panel {
+    position: absolute; left: 50%; top: 50%;
+    width: 100%; max-width: 40rem; max-height: 88vh;
+    background: #F6F3EC;
+    border: 1px solid rgba(21,24,26,0.15);
+    overflow-y: auto;
+    transform: translate(-50%, -46%);
+    opacity: 0;
+    transition: transform .4s cubic-bezier(0.16, 1, 0.3, 1), opacity .3s ease;
+  }
+  .overlay.is-open .modal-panel { transform: translate(-50%, -50%); opacity: 1; }
+
+  .accordion-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(0.16, 1, 0.3, 1); }
+  .accordion-body > div { overflow: hidden; }
+  .accordion-item[data-open="true"] .accordion-body { grid-template-rows: 1fr; }
+  .accordion-item[data-open="true"] .accordion-chevron { transform: rotate(180deg); }
+  .accordion-chevron { transition: transform .35s ease; }
+
+  .step-fill { transition: width .4s cubic-bezier(0.16, 1, 0.3, 1); }
+
+  /* Tray dock */
+  #trayDock { transform: translateY(120%); transition: transform .45s cubic-bezier(0.16, 1, 0.3, 1); }
+  #trayDock.is-visible { transform: translateY(0); }
+
+  @media print {
+    body.print-specs-only > *:not(#assurance) { display: none !important; }
+    body.print-specs-only #assurance { background: #fff !important; color: #15181A !important; padding: 0 !important; }
+    body.print-specs-only #assurance * { color: #15181A !important; }
+    body.print-specs-only #assurance .accordion-body { grid-template-rows: 1fr !important; }
+    body.print-specs-only #assurance .accordion-chevron { display: none; }
+  }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .sample-card, .chip-btn, .sample-img, .hero-img { transition: none !important; }
+    .sample-card, .chip-btn, .sample-img, .hero-img, .drawer-panel, .modal-panel, #trayDock, .accordion-body { transition: none !important; }
   }
 
   ::selection { background: #C79A46; color: #15181A; }
-
-  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
-    outline: 2px solid #12857A;
-    outline-offset: 2px;
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+    outline: 2px solid #12857A; outline-offset: 2px;
   }
 </style>
 </head>
@@ -119,14 +137,19 @@
       <span class="font-display text-xl sm:text-2xl tracking-tight text-stonedark">Stone<span class="text-teal">·</span>Plast</span>
     </a>
 
-    <nav class="hidden md:flex items-center gap-8 text-sm text-ink/80">
+    <nav class="hidden md:flex items-center gap-7 text-sm text-ink/80">
       <a href="#products" class="hover:text-teal transition-colors">Collection</a>
+      <a href="#compare" class="hover:text-teal transition-colors">Compare</a>
+      <a href="#applications" class="hover:text-teal transition-colors">Applications</a>
       <a href="#assurance" class="hover:text-teal transition-colors">Certifications</a>
-      <a href="#why" class="hover:text-teal transition-colors">Why Stone Plast</a>
       <a href="#contact" class="hover:text-teal transition-colors">Contact</a>
     </nav>
 
     <div class="flex items-center gap-3">
+      <button id="navSampleBtn" type="button" class="hidden sm:inline-flex items-center gap-2 border border-stonedark/25 text-stonedark text-sm font-medium px-4 py-2.5 hover:border-teal hover:text-teal transition-colors">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span id="navSampleLabel">Samples (0)</span>
+      </button>
       <a href="tel:02138992" class="hidden sm:inline-flex items-center gap-2 bg-stonedark text-paper text-sm font-medium px-4 py-2.5 border border-stonedark hover:bg-teal hover:border-teal transition-colors">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         Call now
@@ -140,9 +163,11 @@
 
   <div id="mobileMenu" class="hidden md:hidden border-t border-stonedark/10 bg-paper px-5 py-4 space-y-3 text-sm">
     <a href="#products" class="block py-1.5">Collection</a>
+    <a href="#compare" class="block py-1.5">Compare</a>
+    <a href="#applications" class="block py-1.5">Applications</a>
     <a href="#assurance" class="block py-1.5">Certifications</a>
-    <a href="#why" class="block py-1.5">Why Stone Plast</a>
     <a href="#contact" class="block py-1.5">Contact</a>
+    <button type="button" id="navSampleBtnMobile" class="mt-2 flex items-center gap-2 border border-stonedark/25 text-stonedark text-sm font-medium px-4 py-2.5">Samples (<span class="mobileSampleCount">0</span>)</button>
     <a href="tel:02138992" class="mt-2 inline-flex items-center gap-2 bg-stonedark text-paper text-sm font-medium px-4 py-2.5 border border-stonedark">Call 021 38992</a>
   </div>
 </header>
@@ -157,16 +182,15 @@
         Marble&rsquo;s look, without marble&rsquo;s weight or upkeep.
       </h1>
       <p class="mt-6 text-lg text-ink/75 leading-relaxed max-w-lg">
-        Stone Plast manufactures decorative PVC marble sheeting in full original size &mdash; fire-rated, antibacterial, and cut from a working range of more than 90 patterns and solid colors.
+        Stone Plast manufactures decorative PVC marble sheeting in full original size &mdash; fire-rated, antibacterial, and cut from a working range of more than 90 patterns and solid colors. Browse the collection, compare it against stone and tile, then request the samples that fit your project.
       </p>
 
       <div class="mt-9 flex flex-wrap items-center gap-4">
-        <a href="tel:02138992" class="inline-flex items-center gap-2 bg-teal text-white font-medium px-6 py-3.5 border border-teal hover:bg-teal-deep hover:border-teal-deep transition-colors">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          021 38992
+        <a href="#products" class="inline-flex items-center gap-2 bg-teal text-white font-medium px-6 py-3.5 border border-teal hover:bg-teal-deep hover:border-teal-deep transition-colors">
+          Explore the collection
         </a>
-        <a href="#products" class="inline-flex items-center gap-2 border border-stonedark/30 text-stonedark font-medium px-6 py-3.5 hover:border-stonedark transition-colors">
-          Browse the collection
+        <a href="#compare" class="inline-flex items-center gap-2 border border-stonedark/30 text-stonedark font-medium px-6 py-3.5 hover:border-stonedark transition-colors">
+          Compare materials
         </a>
       </div>
 
@@ -188,10 +212,10 @@
 
     <div class="lg:col-span-6 relative">
       <div class="relative h-[420px] sm:h-[480px] lg:h-[540px]">
-        <div class="hero-frame bracket-frame absolute w-[62%] top-0 left-0 overflow-hidden">
+        <div class="hero-frame bracket-frame absolute w-[62%] top-0 left-0 aspect-[4/5] overflow-hidden">
           <img src="images/product-63.jpg" alt="Stone Plast amber and copper marble-pattern PVC sheet sample, code DF-90533-A" class="hero-img w-full h-full object-cover bracket-frame-inner">
         </div>
-        <div class="hero-frame bracket-frame absolute w-[52%] bottom-0 right-0 overflow-hidden">
+        <div class="hero-frame bracket-frame absolute w-[52%] bottom-0 right-0 aspect-[4/5] overflow-hidden">
           <img src="images/product-08.jpg" alt="Stone Plast black marble-pattern PVC sheet sample with white veining, code DF-1426-E" class="hero-img w-full h-full object-cover bracket-frame-inner">
         </div>
         <div class="absolute bottom-6 left-2 bg-paper border border-brass/40 px-4 py-3 hidden sm:block">
@@ -209,25 +233,43 @@
   <div class="max-w-7xl mx-auto">
     <div class="max-w-2xl">
       <h2 class="font-display text-3xl sm:text-4xl leading-tight">Tested, and paperwork to prove it</h2>
-      <p class="mt-4 text-paper/70 leading-relaxed">Every Stone Plast sheet is produced to the same specification that went through independent testing &mdash; not just a marketing claim.</p>
+      <p class="mt-4 text-paper/70 leading-relaxed">Every Stone Plast sheet is produced to the same specification that went through independent testing. Expand either card for the full lab summary.</p>
+      <button type="button" id="downloadSpecBtn" class="mt-6 inline-flex items-center gap-2 text-sm text-brass hover:text-paper border border-brass/40 hover:border-brass px-4 py-2.5 transition-colors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+        Download spec sheet (PDF)
+      </button>
     </div>
 
-    <div class="mt-14 grid lg:grid-cols-12 border-t border-l border-paper/15">
+    <div class="mt-14 grid lg:grid-cols-12 border-t border-l border-paper/15" id="specAccordion">
 
-      <div class="lg:col-span-7 border-r border-b border-paper/15 p-8 sm:p-10 flex flex-col justify-between">
-        <div>
-          <p class="code-chip text-xs text-brass mb-6">EN 13501&#8209;1</p>
-          <h3 class="font-display text-2xl sm:text-3xl leading-snug max-w-md">Fire class B&#8209;s2,d0</h3>
+      <div class="accordion-item lg:col-span-7 border-r border-b border-paper/15" data-open="false">
+        <button type="button" class="accordion-toggle w-full text-left p-8 sm:p-10 flex items-start justify-between gap-6">
+          <span>
+            <span class="code-chip text-xs text-brass block mb-6">EN 13501&#8209;1</span>
+            <span class="font-display text-2xl sm:text-3xl leading-snug block max-w-md">Fire class B&#8209;s2,d0</span>
+          </span>
+          <svg class="accordion-chevron shrink-0 mt-2" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C79A46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-body px-8 sm:px-10">
+          <div>
+            <p class="text-sm text-paper/65 leading-relaxed max-w-md pb-8">Reaction-to-fire classified under EN 13501&#8209;1 and Iranian National Standard 8299&#8209;1 by the Road, Housing &amp; Urban Development Research Center. Classification covers flame spread, heat release and smoke production (s2) with no flaming droplets (d0) &mdash; the profile specified for wall linings in occupied commercial interiors.</p>
+          </div>
         </div>
-        <p class="text-sm text-paper/65 leading-relaxed max-w-md mt-8">Reaction-to-fire classified under EN 13501&#8209;1 and Iranian National Standard 8299&#8209;1 by the Road, Housing &amp; Urban Development Research Center.</p>
       </div>
 
-      <div class="lg:col-span-5 border-b border-paper/15 p-8 sm:p-10 flex flex-col justify-between">
-        <div>
-          <p class="code-chip text-xs text-brass mb-6">ATCC 25922</p>
-          <h3 class="font-display text-2xl sm:text-3xl leading-snug">Antibacterial surface</h3>
+      <div class="accordion-item lg:col-span-5 border-b border-paper/15" data-open="false">
+        <button type="button" class="accordion-toggle w-full text-left p-8 sm:p-10 flex items-start justify-between gap-6">
+          <span>
+            <span class="code-chip text-xs text-brass block mb-6">ATCC 25922</span>
+            <span class="font-display text-2xl sm:text-3xl leading-snug block">Antibacterial surface</span>
+          </span>
+          <svg class="accordion-chevron shrink-0 mt-2" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C79A46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-body px-8 sm:px-10">
+          <div>
+            <p class="text-sm text-paper/65 leading-relaxed pb-8">Pasteur Institute of Iran testing against E. coli (ATCC 25922) recorded over 99.9% bacterial reduction after 24 hours of surface contact, using the same sheet finish sold across the collection &mdash; not a treated test sample.</p>
+          </div>
         </div>
-        <p class="text-sm text-paper/65 leading-relaxed mt-8">Pasteur Institute of Iran testing recorded over 99.9% bacterial reduction after 24 hours of surface contact.</p>
       </div>
 
       <div class="lg:col-span-12 border-b border-paper/15 p-8 sm:p-10">
@@ -254,21 +296,23 @@
 
 <!-- ============ PRODUCTS ============ -->
 <section id="products" class="py-20 sm:py-28 px-5 sm:px-8 max-w-7xl mx-auto">
-  <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
+  <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10">
     <div class="max-w-xl">
       <h2 class="font-display text-3xl sm:text-4xl leading-tight text-stonedark">A pattern for every room</h2>
-      <p class="mt-4 text-ink/70 leading-relaxed">From deep black-and-gold veining to solid studio colors, these are a sample of the 90+ designs currently in production. Sheets ship in full original size.</p>
-    </div>
-
-    <div class="flex flex-wrap gap-2" role="group" aria-label="Filter the collection">
-      <button type="button" data-filter="all" aria-pressed="true" class="chip-btn px-4 py-2 text-sm border border-stonedark/25 transition-colors">All designs</button>
-      <button type="button" data-filter="pattern" aria-pressed="false" class="chip-btn px-4 py-2 text-sm border border-stonedark/25 transition-colors">Marble &amp; stone</button>
-      <button type="button" data-filter="solid" aria-pressed="false" class="chip-btn px-4 py-2 text-sm border border-stonedark/25 transition-colors">Solid colors</button>
+      <p class="mt-4 text-ink/70 leading-relaxed">From deep black-and-gold veining to solid studio colors. Tap any swatch for the full material breakdown and to add it to your sample request.</p>
     </div>
   </div>
 
+  <div class="flex flex-wrap gap-2 mb-10" role="group" aria-label="Filter the collection">
+    <button type="button" data-filter="all" aria-pressed="true" class="chip-btn px-4 py-2 text-sm border border-stonedark/25 transition-colors">All designs</button>
+    <button type="button" data-filter="dark" aria-pressed="false" class="chip-btn px-4 py-2 text-sm border border-stonedark/25 transition-colors">Dark Marble</button>
+    <button type="button" data-filter="light" aria-pressed="false" class="chip-btn px-4 py-2 text-sm border border-stonedark/25 transition-colors">Light Marble</button>
+    <button type="button" data-filter="warm" aria-pressed="false" class="chip-btn px-4 py-2 text-sm border border-stonedark/25 transition-colors">Warm Tones</button>
+    <button type="button" data-filter="solid" aria-pressed="false" class="chip-btn px-4 py-2 text-sm border border-stonedark/25 transition-colors">Solid Colors</button>
+  </div>
+
   <div id="productGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
-    <!-- Cards injected below -->
+    <!-- Cards injected by JS -->
   </div>
 
   <div class="mt-16 bracket-frame bracket-sm border border-brass/30 px-6 py-8 sm:px-10 sm:py-9 flex flex-col sm:flex-row items-center justify-between gap-6">
@@ -280,38 +324,91 @@
   </div>
 </section>
 
-<!-- ============ WHY STONE PLAST ============ -->
-<section id="why" class="bg-white border-y border-stonedark/10 py-20 sm:py-28 px-5 sm:px-8">
-  <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12">
-    <div class="lg:col-span-4">
-      <h2 class="font-display text-3xl sm:text-4xl leading-tight text-stonedark">Built for real installations</h2>
-      <p class="mt-4 text-ink/70 leading-relaxed">PVC marble sheeting solves problems natural stone can&rsquo;t &mdash; without giving up the finish people actually want.</p>
+<!-- ============ COMPARISON ============ -->
+<section id="compare" class="bg-white border-y border-stonedark/10 py-20 sm:py-28 px-5 sm:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="max-w-2xl mb-12">
+      <h2 class="font-display text-3xl sm:text-4xl leading-tight text-stonedark">How it stacks up</h2>
+      <p class="mt-4 text-ink/70 leading-relaxed">A general comparison against natural marble slab and ceramic tile, based on typical installations. Exact figures vary by supplier and project &mdash; ask your contractor for slab- or tile-specific numbers.</p>
     </div>
 
-    <div class="lg:col-span-8 grid sm:grid-cols-2 gap-x-10 gap-y-10">
-      <div class="flex gap-4 border-t border-brass/40 pt-5">
-        <div>
-          <h3 class="font-display text-lg leading-snug text-stonedark mb-1.5">Roughly a quarter lighter</h3>
-          <p class="text-sm text-ink/65 leading-relaxed">At an average density of 1,985.9 kg/m&sup3;, Stone Plast sheeting is markedly lighter than natural marble slab, easing handling, framing loads and shipping.</p>
-        </div>
+    <div class="overflow-x-auto">
+      <table class="w-full min-w-[720px] border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-stonedark/15">
+            <th class="text-left font-medium text-muted py-4 pr-6 w-1/4">Criteria</th>
+            <th class="text-left font-display text-lg text-teal-deep py-4 px-6 border-x border-brass/40 bg-teal-pale/40 w-1/4">Stone Plast PVC</th>
+            <th class="text-left font-display text-lg text-stonedark py-4 px-6 w-1/4">Natural Marble Slab</th>
+            <th class="text-left font-display text-lg text-stonedark py-4 pl-6 w-1/4">Ceramic Tile</th>
+          </tr>
+        </thead>
+        <tbody id="compareBody"><!-- rows injected by JS --></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ APPLICATIONS ============ -->
+<section id="applications" class="py-20 sm:py-28 px-5 sm:px-8 max-w-7xl mx-auto">
+  <div class="max-w-2xl mb-10">
+    <h2 class="font-display text-3xl sm:text-4xl leading-tight text-stonedark">Suited by application</h2>
+    <p class="mt-4 text-ink/70 leading-relaxed">Switch between environments to see which finish and which properties matter most in each one.</p>
+  </div>
+
+  <div class="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Application environments" id="appTabs">
+    <button type="button" class="tab-btn px-4 py-2 text-sm border border-stonedark/25 transition-colors" role="tab" data-app="wall" aria-selected="true">Feature Wall</button>
+    <button type="button" class="tab-btn px-4 py-2 text-sm border border-stonedark/25 transition-colors" role="tab" data-app="bath" aria-selected="false">Wet Bathroom / Shower</button>
+    <button type="button" class="tab-btn px-4 py-2 text-sm border border-stonedark/25 transition-colors" role="tab" data-app="lobby" aria-selected="false">Commercial Lobby</button>
+    <button type="button" class="tab-btn px-4 py-2 text-sm border border-stonedark/25 transition-colors" role="tab" data-app="kitchen" aria-selected="false">Kitchen Backsplash</button>
+  </div>
+
+  <div class="grid lg:grid-cols-12 gap-10 items-center">
+    <div class="lg:col-span-6 bracket-frame">
+      <div class="aspect-[4/5] overflow-hidden bracket-frame-inner">
+        <img id="appImage" src="images/product-08.jpg" alt="" class="w-full h-full object-cover">
       </div>
-      <div class="flex gap-4 border-t border-brass/40 pt-5">
-        <div>
-          <h3 class="font-display text-lg leading-snug text-stonedark mb-1.5">Moisture-resistant PVC core</h3>
-          <p class="text-sm text-ink/65 leading-relaxed">Unlike porous natural stone, the PVC base doesn&rsquo;t need sealing against everyday moisture &mdash; suited to kitchens, bathrooms and wet areas.</p>
-        </div>
+    </div>
+    <div class="lg:col-span-6">
+      <p id="appPatternCode" class="code-chip text-xs text-brass mb-4">DF-1426-E</p>
+      <h3 id="appPatternName" class="font-display text-3xl text-stonedark mb-4">Noir Vein</h3>
+      <p id="appCopy" class="text-ink/70 leading-relaxed max-w-md"></p>
+      <button type="button" id="appAddSample" class="mt-6 inline-flex items-center gap-2 border border-stonedark/30 text-stonedark font-medium px-5 py-3 hover:border-teal hover:text-teal transition-colors">Add this pattern to samples</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSTALLATION PROCESS ============ -->
+<section class="bg-stonedark text-paper py-20 sm:py-28 px-5 sm:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="max-w-2xl mb-14">
+      <h2 class="font-display text-3xl sm:text-4xl leading-tight">On-site, in four passes</h2>
+      <p class="mt-4 text-paper/70 leading-relaxed">Full sheet size means fewer seams and a faster install than tiling.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-paper/15">
+      <div class="border-r border-b border-paper/15 p-8">
+        <span class="code-chip text-xs text-brass block mb-6">01</span>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C79A46" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="mb-5"><path d="M21 3 3 21"/><path d="m6 18 3 3"/><path d="m10 14 3 3"/><path d="m14 10 3 3"/><path d="m18 6 3 3"/></svg>
+        <h3 class="font-medium mb-2">Measure</h3>
+        <p class="text-sm text-paper/60 leading-relaxed">Wall and surface dimensions are taken on site to plan sheet layout and minimise offcuts.</p>
       </div>
-      <div class="flex gap-4 border-t border-brass/40 pt-5">
-        <div>
-          <h3 class="font-display text-lg leading-snug text-stonedark mb-1.5">Full original-size sheets</h3>
-          <p class="text-sm text-ink/65 leading-relaxed">Panels are produced at full sheet size rather than small tiles, giving fewer seams and faster coverage across walls and surfaces.</p>
-        </div>
+      <div class="border-r border-b border-paper/15 p-8">
+        <span class="code-chip text-xs text-brass block mb-6">02</span>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C79A46" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="mb-5"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88"/><path d="M14.47 14.48 20 20"/><path d="M8.12 8.12 12 12"/></svg>
+        <h3 class="font-medium mb-2">Cut</h3>
+        <p class="text-sm text-paper/60 leading-relaxed">Full original-size sheets are cut to the exact panel dimensions for that wall or run.</p>
       </div>
-      <div class="flex gap-4 border-t border-brass/40 pt-5">
-        <div>
-          <h3 class="font-display text-lg leading-snug text-stonedark mb-1.5">One supplier, one showroom</h3>
-          <p class="text-sm text-ink/65 leading-relaxed">Marble and stone patterns, solid studio colors, and matching accessories are manufactured and sourced through a single Tehran-based facility.</p>
-        </div>
+      <div class="border-r border-b border-paper/15 p-8">
+        <span class="code-chip text-xs text-brass block mb-6">03</span>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C79A46" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="mb-5"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        <h3 class="font-medium mb-2">Adhere</h3>
+        <p class="text-sm text-paper/60 leading-relaxed">Panels are bonded flat to the substrate, edge to edge, with minimal seam count.</p>
+      </div>
+      <div class="border-r border-b border-paper/15 p-8">
+        <span class="code-chip text-xs text-brass block mb-6">04</span>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C79A46" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="mb-5"><path d="M4 4h16v6H4z"/><path d="M4 14h10v6H4z"/></svg>
+        <h3 class="font-medium mb-2">Trim</h3>
+        <p class="text-sm text-paper/60 leading-relaxed">Edges and corners are finished with matching trims for a continuous, sealed line.</p>
       </div>
     </div>
   </div>
@@ -418,7 +515,7 @@
 </section>
 
 <!-- ============ FOOTER ============ -->
-<footer class="bg-stonedark text-paper/70 pt-16 pb-8 px-5 sm:px-8">
+<footer class="bg-stonedark text-paper/70 pt-16 pb-28 sm:pb-8 px-5 sm:px-8">
   <div class="max-w-7xl mx-auto">
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-paper/10">
       <div class="lg:col-span-2">
@@ -429,8 +526,9 @@
         <h4 class="text-sm font-medium text-paper mb-4">Site</h4>
         <ul class="space-y-2.5 text-sm">
           <li><a href="#products" class="hover:text-teal transition-colors">Collection</a></li>
+          <li><a href="#compare" class="hover:text-teal transition-colors">Compare</a></li>
+          <li><a href="#applications" class="hover:text-teal transition-colors">Applications</a></li>
           <li><a href="#assurance" class="hover:text-teal transition-colors">Certifications</a></li>
-          <li><a href="#why" class="hover:text-teal transition-colors">Why Stone Plast</a></li>
           <li><a href="#contact" class="hover:text-teal transition-colors">Contact</a></li>
         </ul>
       </div>
@@ -450,10 +548,159 @@
   </div>
 </footer>
 
+<!-- ============ SAMPLE TRAY DOCK ============ -->
+<div id="trayDock" class="fixed bottom-0 inset-x-0 z-40 bg-stonedark text-paper border-t border-brass/40">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-4 flex items-center justify-between gap-4">
+    <div class="min-w-0">
+      <p class="text-sm font-medium"><span id="trayCount">0</span> sample<span id="trayPlural">s</span> selected</p>
+      <p id="trayChips" class="code-chip text-xs text-paper/60 truncate mt-0.5"></p>
+    </div>
+    <div class="flex items-center gap-3 shrink-0">
+      <button type="button" id="trayClear" class="hidden sm:inline text-xs text-paper/60 hover:text-paper underline underline-offset-2">Clear</button>
+      <button type="button" id="trayRequest" class="bg-teal text-white font-medium px-5 py-2.5 border border-teal hover:bg-teal-deep hover:border-teal-deep transition-colors text-sm">Request samples</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PRODUCT DRAWER ============ -->
+<div id="productOverlay" class="overlay" hidden>
+  <div class="overlay-scrim" data-close-drawer></div>
+  <div class="drawer-panel">
+    <div class="p-6 sm:p-8">
+      <button type="button" data-close-drawer class="mb-6 inline-flex items-center gap-2 text-sm text-muted hover:text-stonedark">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>
+        Close
+      </button>
+
+      <div class="bracket-frame bracket-sm">
+        <div class="aspect-[4/5] overflow-hidden bracket-frame-inner">
+          <img id="drawerImg" src="" alt="" class="w-full h-full object-cover">
+        </div>
+      </div>
+
+      <p id="drawerCode" class="code-chip text-xs text-brass mt-6 mb-2"></p>
+      <h3 id="drawerName" class="font-display text-3xl text-stonedark mb-3"></h3>
+      <p id="drawerBlurb" class="text-sm text-ink/70 leading-relaxed"></p>
+
+      <dl class="mt-8 border-t border-stonedark/15">
+        <div class="flex justify-between py-3 border-b border-stonedark/10 text-sm">
+          <dt class="text-muted">Thickness</dt><dd class="text-stonedark font-medium">3.2 mm</dd>
+        </div>
+        <div class="flex justify-between py-3 border-b border-stonedark/10 text-sm">
+          <dt class="text-muted">Surface weight</dt><dd class="text-stonedark font-medium">6.4 kg/m&sup2;</dd>
+        </div>
+        <div class="flex justify-between py-3 border-b border-stonedark/10 text-sm">
+          <dt class="text-muted">Fire rating</dt><dd class="text-stonedark font-medium">B&#8209;s2,d0</dd>
+        </div>
+      </dl>
+
+      <div class="mt-8 flex flex-col gap-3">
+        <button type="button" id="drawerAddBtn" class="w-full inline-flex items-center justify-center gap-2 bg-teal text-white font-medium px-6 py-3.5 border border-teal hover:bg-teal-deep hover:border-teal-deep transition-colors">Add to Sample Request</button>
+        <a href="tel:02138992" id="drawerCallLink" class="w-full inline-flex items-center justify-center gap-2 border border-stonedark/25 text-stonedark font-medium px-6 py-3.5 hover:border-stonedark transition-colors">Call about this pattern</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SAMPLE REQUEST MODAL ============ -->
+<div id="sampleOverlay" class="overlay" hidden>
+  <div class="overlay-scrim" data-close-modal></div>
+  <div class="modal-panel">
+    <div class="p-6 sm:p-9">
+      <div class="flex items-start justify-between gap-6 mb-6">
+        <h3 class="font-display text-2xl text-stonedark">Request samples</h3>
+        <button type="button" data-close-modal aria-label="Close" class="text-muted hover:text-stonedark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Step indicator -->
+      <div class="mb-8">
+        <div class="flex justify-between text-xs text-muted mb-2">
+          <span data-step-label="1">1. Samples</span>
+          <span data-step-label="2">2. Project</span>
+          <span data-step-label="3">3. Delivery</span>
+        </div>
+        <div class="h-px bg-stonedark/15 relative">
+          <div id="stepFill" class="step-fill h-px bg-teal absolute left-0 top-0" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Replace this action URL with your order-processing endpoint. Standard HTML form POST — no JS interception on submit. -->
+      <form id="sampleForm" action="#" method="POST">
+        <input type="hidden" name="sample_codes" id="sampleCodesInput">
+
+        <div class="form-step" data-form-step="1">
+          <p class="text-sm text-ink/70 mb-4">These are the patterns you've selected. Remove any you don't need, or head back to the collection to add more.</p>
+          <ul id="sampleReviewList" class="divide-y divide-stonedark/10 border-y border-stonedark/10"></ul>
+          <p id="sampleEmptyMsg" class="text-sm text-muted py-6 hidden">No samples selected yet — close this and tap a swatch to add one.</p>
+        </div>
+
+        <div class="form-step hidden" data-form-step="2">
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="reqName" class="block text-sm font-medium text-stonedark mb-1.5">Full name</label>
+              <input id="reqName" name="name" type="text" required class="w-full border border-stonedark/20 px-4 py-2.5 text-sm focus:border-teal outline-none">
+            </div>
+            <div>
+              <label for="reqEmail" class="block text-sm font-medium text-stonedark mb-1.5">Email</label>
+              <input id="reqEmail" name="email" type="email" required class="w-full border border-stonedark/20 px-4 py-2.5 text-sm focus:border-teal outline-none">
+            </div>
+            <div>
+              <label for="reqPhone" class="block text-sm font-medium text-stonedark mb-1.5">Phone</label>
+              <input id="reqPhone" name="phone" type="tel" required class="w-full border border-stonedark/20 px-4 py-2.5 text-sm focus:border-teal outline-none">
+            </div>
+            <div>
+              <label for="reqType" class="block text-sm font-medium text-stonedark mb-1.5">Project type</label>
+              <select id="reqType" name="project_type" class="w-full border border-stonedark/20 px-4 py-2.5 text-sm focus:border-teal outline-none bg-white">
+                <option>Residential</option>
+                <option>Commercial</option>
+                <option>Hospitality</option>
+                <option>Retail</option>
+              </select>
+            </div>
+          </div>
+          <div class="mt-5">
+            <label for="reqNotes" class="block text-sm font-medium text-stonedark mb-1.5">Project notes</label>
+            <textarea id="reqNotes" name="notes" rows="3" class="w-full border border-stonedark/20 px-4 py-2.5 text-sm focus:border-teal outline-none" placeholder="Surface area, timeline, anything else useful."></textarea>
+          </div>
+        </div>
+
+        <div class="form-step hidden" data-form-step="3">
+          <div class="grid gap-5">
+            <div>
+              <label for="reqAddress" class="block text-sm font-medium text-stonedark mb-1.5">Delivery address</label>
+              <input id="reqAddress" name="address" type="text" required class="w-full border border-stonedark/20 px-4 py-2.5 text-sm focus:border-teal outline-none">
+            </div>
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label for="reqCity" class="block text-sm font-medium text-stonedark mb-1.5">City</label>
+                <input id="reqCity" name="city" type="text" required class="w-full border border-stonedark/20 px-4 py-2.5 text-sm focus:border-teal outline-none">
+              </div>
+              <div>
+                <label for="reqPostal" class="block text-sm font-medium text-stonedark mb-1.5">Postal code</label>
+                <input id="reqPostal" name="postal_code" type="text" class="w-full border border-stonedark/20 px-4 py-2.5 text-sm focus:border-teal outline-none">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 flex items-center justify-between gap-4">
+          <button type="button" id="stepBack" class="text-sm text-stonedark hover:text-teal disabled:opacity-0 disabled:pointer-events-none">&larr; Back</button>
+          <div class="flex gap-3">
+            <button type="button" id="stepNext" class="bg-stonedark text-paper font-medium px-6 py-3 border border-stonedark hover:bg-teal hover:border-teal transition-colors">Next</button>
+            <button type="submit" id="stepSubmit" class="hidden bg-teal text-white font-medium px-6 py-3 border border-teal hover:bg-teal-deep hover:border-teal-deep transition-colors">Submit request</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Mobile menu
+  /* ---------- Mobile menu ---------- */
   const menuBtn = document.getElementById('menuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
   const iconOpen = document.getElementById('menuIconOpen');
@@ -471,34 +718,81 @@
     iconClose.classList.add('hidden');
   }));
 
-  // Product data — code, category, name, image
+  /* ---------- Product data ---------- */
   const PRODUCTS = [
-    { code: 'DF-1426-E', name: 'Noir Vein', cat: 'pattern', img: 'images/product-08.jpg' },
-    { code: 'DF-1445-B', name: 'Canyon Rose', cat: 'pattern', img: 'images/product-10.jpg' },
-    { code: 'DF-1446-A', name: 'Alpine White', cat: 'pattern', img: 'images/product-13.jpg' },
-    { code: 'DF-1448-A', name: 'Golden Sand', cat: 'pattern', img: 'images/product-15.jpg' },
-    { code: 'DF-1450-D', name: 'Storm Grey', cat: 'pattern', img: 'images/product-17.jpg' },
-    { code: 'DF-1451-A', name: 'Ivory Gold', cat: 'pattern', img: 'images/product-20.jpg' },
-    { code: 'DF-1457-A', name: 'Arctic Blue', cat: 'pattern', img: 'images/product-26.jpg' },
-    { code: 'DF-2833-E', name: 'Olive Stone', cat: 'pattern', img: 'images/product-45.jpg' },
-    { code: 'DF-2835-I', name: 'Midnight Navy', cat: 'pattern', img: 'images/product-49.jpg' },
-    { code: 'DF-2857-A', name: 'Onyx Gold', cat: 'pattern', img: 'images/product-54.jpg' },
-    { code: 'DF-90533-A', name: 'Amber Fire', cat: 'pattern', img: 'images/product-63.jpg' },
-    { code: 'YF-9962', name: 'Lagoon Gold', cat: 'pattern', img: 'images/product-80.jpg' },
-    { code: 'YF-9966', name: 'Turquoise Vein', cat: 'pattern', img: 'images/product-82.jpg' },
-    { code: '1010', name: 'Sandstone', cat: 'solid', img: 'images/product-84.jpg' },
-    { code: '1010-1', name: 'Sage Mint', cat: 'solid', img: 'images/product-85.jpg' },
-    { code: '1010-2', name: 'Sky', cat: 'solid', img: 'images/product-86.jpg' },
-    { code: '1010-7', name: 'Cardinal Red', cat: 'solid', img: 'images/product-91.jpg' },
-    { code: '1010-9', name: 'Forest Green', cat: 'solid', img: 'images/product-92.jpg' },
+    { code: 'DF-1426-E',  name: 'Noir Vein',       cat: 'dark',  img: 'images/product-08.jpg', blurb: 'Deep charcoal ground with fine white veining, cut for bold feature walls and reception fronts.' },
+    { code: 'DF-1445-B',  name: 'Canyon Rose',     cat: 'warm',  img: 'images/product-10.jpg', blurb: 'Warm terracotta-pink stone tones with soft grey drift, suited to dining and lounge settings.' },
+    { code: 'DF-1446-A',  name: 'Alpine White',    cat: 'light', img: 'images/product-13.jpg', blurb: 'Bright white ground with pale grey veining, a clean backdrop for kitchens and bathrooms.' },
+    { code: 'DF-1448-A',  name: 'Golden Sand',     cat: 'warm',  img: 'images/product-15.jpg', blurb: 'Sandy beige with fine gold striations, reads calm in daylight and rich under warm lighting.' },
+    { code: 'DF-1450-D',  name: 'Storm Grey',      cat: 'dark',  img: 'images/product-17.jpg', blurb: 'Cool graphite base with cloud-like movement, a versatile match for steel and matte black fixtures.' },
+    { code: 'DF-1451-A',  name: 'Ivory Gold',      cat: 'light', img: 'images/product-20.jpg', blurb: 'Ivory field with delicate gold veining, a lighter-touch alternative to full black-and-gold marble.' },
+    { code: 'DF-1457-A',  name: 'Arctic Blue',     cat: 'light', img: 'images/product-26.jpg', blurb: 'Icy blue-white ground with fine grey veining, popular for spa and wet-area installations.' },
+    { code: 'DF-2833-E',  name: 'Olive Stone',     cat: 'warm',  img: 'images/product-45.jpg', blurb: 'Earthy olive-green stone texture, an unusual pick for study rooms and boutique retail fit-outs.' },
+    { code: 'DF-2835-I',  name: 'Midnight Navy',   cat: 'dark',  img: 'images/product-49.jpg', blurb: 'Deep navy ground with silvery veining, a darker alternative to classic black marble.' },
+    { code: 'DF-2857-A',  name: 'Onyx Gold',       cat: 'dark',  img: 'images/product-54.jpg', blurb: 'Black onyx base threaded with gold, built for statement lobby and bar-front panels.' },
+    { code: 'DF-90533-A', name: 'Amber Fire',      cat: 'warm',  img: 'images/product-63.jpg', blurb: 'Amber and copper marbling with dramatic movement, a focal-point choice for feature walls.' },
+    { code: 'YF-9962',    name: 'Lagoon Gold',     cat: 'warm',  img: 'images/product-80.jpg', blurb: 'Warm gold-green stone pattern with soft depth, suited to hospitality and lounge interiors.' },
+    { code: 'YF-9966',    name: 'Turquoise Vein',  cat: 'light', img: 'images/product-82.jpg', blurb: 'Bright turquoise veining on a pale ground, a statement finish for feature niches and vanities.' },
+    { code: '1010',       name: 'Sandstone',       cat: 'solid', img: 'images/product-84.jpg', blurb: 'Flat, matte sand tone for trims, reveals and panels that need to sit quietly beside patterned sheets.' },
+    { code: '1010-1',     name: 'Sage Mint',       cat: 'solid', img: 'images/product-85.jpg', blurb: 'Muted sage green in a solid finish, works well as an accent band or skirting colour.' },
+    { code: '1010-2',     name: 'Sky',             cat: 'solid', img: 'images/product-86.jpg', blurb: 'Clean pale blue solid, a common pairing with white marble patterns in bathrooms.' },
+    { code: '1010-7',     name: 'Cardinal Red',    cat: 'solid', img: 'images/product-91.jpg', blurb: 'Saturated solid red for signage panels, retail fixtures and accent trims.' },
+    { code: '1010-9',     name: 'Forest Green',    cat: 'solid', img: 'images/product-92.jpg', blurb: 'Deep solid green, a matte counterpoint to gold-veined marble patterns.' },
   ];
 
+  const APPLICATIONS = {
+    wall:    { code: 'DF-1426-E',  copy: 'Feature walls favour high-contrast veining that reads from across a room. Noir Vein\u2019s dark ground and fire-rated backing make it a common pick for reception and lounge walls.' },
+    bath:    { code: 'DF-1457-A',  copy: 'Wet bathrooms and showers need a moisture-resistant, sealable surface. The PVC core doesn\u2019t need sealing the way natural stone does, and Arctic Blue keeps the space feeling light.' },
+    lobby:   { code: 'DF-90533-A', copy: 'Commercial lobbies see heavy footfall and want a material that still looks considered at scale. Full original-size sheets mean fewer seams across a large panel.' },
+    kitchen: { code: 'DF-1446-A',  copy: 'Kitchen backsplashes sit close to heat and moisture. Alpine White\u2019s light, even ground is easy to keep clean and pairs with most cabinetry tones.' },
+  };
+
+  const COMPARISON_ROWS = [
+    { label: 'Weight',              sp: 'Light — 6.4 kg/m²',          marble: 'Heavy — often 25–40 kg/m² slab', tile: 'Moderate — varies by format' },
+    { label: 'Installation time',   sp: 'Fast — full sheets, few seams', marble: 'Slow — cutting, fitting, polishing', tile: 'Moderate — tile-by-tile, grouting' },
+    { label: 'Moisture resistance', sp: 'High — no sealing needed',    marble: 'Needs periodic sealing',          tile: 'Good, if grout is maintained' },
+    { label: 'Fire class',          sp: 'B-s2,d0 (EN 13501-1)',        marble: 'Non-combustible, but heavy',      tile: 'Non-combustible, but rigid' },
+    { label: 'Relative cost',       sp: 'Lower material + labour',     marble: 'Highest — material and install',  tile: 'Mid-range — labour intensive' },
+  ];
+
+  /* ---------- Sample tray state ---------- */
+  const tray = new Set();
+
+  function updateTrayUI() {
+    const codes = [...tray];
+    const count = codes.length;
+    document.getElementById('trayCount').textContent = count;
+    document.getElementById('trayPlural').textContent = count === 1 ? '' : 's';
+    document.getElementById('trayChips').textContent = codes.join(' · ');
+    document.getElementById('navSampleLabel').textContent = `Samples (${count})`;
+    document.querySelectorAll('.mobileSampleCount').forEach(el => el.textContent = count);
+    document.getElementById('trayDock').classList.toggle('is-visible', count > 0);
+    document.getElementById('sampleCodesInput').value = codes.join(', ');
+
+    // sync drawer add button if a product's drawer happens to be open
+    if (currentDrawerCode) setDrawerButtonState(currentDrawerCode);
+  }
+
+  function toggleSample(code) {
+    if (tray.has(code)) tray.delete(code); else tray.add(code);
+    updateTrayUI();
+    return tray.has(code);
+  }
+
+  document.getElementById('trayClear').addEventListener('click', () => { tray.clear(); updateTrayUI(); });
+  document.getElementById('navSampleBtn').addEventListener('click', openSampleModal);
+  document.getElementById('navSampleBtnMobile').addEventListener('click', openSampleModal);
+  document.getElementById('trayRequest').addEventListener('click', openSampleModal);
+
+  /* ---------- Product grid + filters ---------- */
   const grid = document.getElementById('productGrid');
   function renderProducts(filter) {
     grid.innerHTML = '';
     PRODUCTS.filter(p => filter === 'all' || p.cat === filter).forEach(p => {
-      const card = document.createElement('div');
-      card.className = 'sample-card bracket-frame bracket-sm';
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'sample-card';
+      card.setAttribute('data-code', p.code);
       card.innerHTML = `
         <div class="bracket-frame-inner aspect-[4/5] overflow-hidden bg-stonedark/5">
           <img src="${p.img}" alt="${p.name} — Stone Plast PVC marble sheet, code ${p.code}" loading="lazy" class="sample-img w-full h-full object-cover">
@@ -508,25 +802,192 @@
             <p class="text-sm font-medium text-stonedark">${p.name}</p>
             <p class="code-chip text-xs text-muted">${p.code}</p>
           </div>
-          <a href="tel:02138992" aria-label="Call about ${p.name}" class="text-teal-deep hover:text-teal">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </a>
+          <span class="tray-indicator text-teal-deep text-xs font-medium ${tray.has(p.code) ? '' : 'hidden'}">Added</span>
         </div>
       `;
+      card.addEventListener('click', () => openDrawer(p.code));
       grid.appendChild(card);
     });
   }
   renderProducts('all');
 
-  document.querySelectorAll('.chip-btn').forEach(btn => {
+  document.querySelectorAll('#products .chip-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.chip-btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
+      document.querySelectorAll('#products .chip-btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
       btn.setAttribute('aria-pressed', 'true');
       renderProducts(btn.dataset.filter);
     });
   });
 
-  // Contact form -> mailto
+  function findProduct(code) { return PRODUCTS.find(p => p.code === code); }
+
+  /* ---------- Product drawer ---------- */
+  const productOverlay = document.getElementById('productOverlay');
+  let currentDrawerCode = null;
+
+  function setDrawerButtonState(code) {
+    const btn = document.getElementById('drawerAddBtn');
+    if (tray.has(code)) {
+      btn.textContent = 'Added — remove from request';
+      btn.classList.add('bg-teal-deep', 'border-teal-deep');
+    } else {
+      btn.textContent = 'Add to Sample Request';
+      btn.classList.remove('bg-teal-deep', 'border-teal-deep');
+    }
+  }
+
+  function openDrawer(code) {
+    const p = findProduct(code);
+    if (!p) return;
+    currentDrawerCode = code;
+    document.getElementById('drawerImg').src = p.img;
+    document.getElementById('drawerImg').alt = `${p.name} — Stone Plast PVC marble sheet, code ${p.code}`;
+    document.getElementById('drawerCode').textContent = p.code;
+    document.getElementById('drawerName').textContent = p.name;
+    document.getElementById('drawerBlurb').textContent = p.blurb;
+    setDrawerButtonState(code);
+    productOverlay.hidden = false;
+    requestAnimationFrame(() => productOverlay.classList.add('is-open'));
+    document.body.classList.add('drawer-open');
+  }
+
+  function closeDrawer() {
+    productOverlay.classList.remove('is-open');
+    document.body.classList.remove('drawer-open');
+    setTimeout(() => { productOverlay.hidden = true; }, 450);
+  }
+
+  document.querySelectorAll('[data-close-drawer]').forEach(el => el.addEventListener('click', closeDrawer));
+
+  document.getElementById('drawerAddBtn').addEventListener('click', () => {
+    if (!currentDrawerCode) return;
+    toggleSample(currentDrawerCode);
+    setDrawerButtonState(currentDrawerCode);
+    renderProducts(document.querySelector('#products .chip-btn[aria-pressed="true"]').dataset.filter);
+  });
+
+  /* ---------- Comparison table ---------- */
+  const compareBody = document.getElementById('compareBody');
+  COMPARISON_ROWS.forEach(row => {
+    const tr = document.createElement('tr');
+    tr.className = 'border-b border-stonedark/10';
+    tr.innerHTML = `
+      <td class="py-4 pr-6 text-muted">${row.label}</td>
+      <td class="py-4 px-6 border-x border-brass/40 bg-teal-pale/40 font-medium text-teal-deep">${row.sp}</td>
+      <td class="py-4 px-6 text-ink/75">${row.marble}</td>
+      <td class="py-4 pl-6 text-ink/75">${row.tile}</td>
+    `;
+    compareBody.appendChild(tr);
+  });
+
+  /* ---------- Application switcher ---------- */
+  function setApplication(id) {
+    const app = APPLICATIONS[id];
+    const p = findProduct(app.code);
+    document.getElementById('appImage').src = p.img;
+    document.getElementById('appImage').alt = `${p.name} — Stone Plast PVC marble sheet, code ${p.code}`;
+    document.getElementById('appPatternCode').textContent = p.code;
+    document.getElementById('appPatternName').textContent = p.name;
+    document.getElementById('appCopy').textContent = app.copy;
+    document.getElementById('appAddSample').dataset.code = p.code;
+    document.querySelectorAll('#appTabs .tab-btn').forEach(b => b.setAttribute('aria-selected', String(b.dataset.app === id)));
+  }
+  document.querySelectorAll('#appTabs .tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => setApplication(btn.dataset.app));
+  });
+  document.getElementById('appAddSample').addEventListener('click', (e) => {
+    toggleSample(e.currentTarget.dataset.code);
+  });
+  setApplication('wall');
+
+  /* ---------- Certification accordion ---------- */
+  document.querySelectorAll('#specAccordion .accordion-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.accordion-item');
+      const open = item.getAttribute('data-open') === 'true';
+      item.setAttribute('data-open', String(!open));
+    });
+  });
+
+  /* ---------- Download spec sheet (scoped browser print, no library) ---------- */
+  document.getElementById('downloadSpecBtn').addEventListener('click', () => {
+    document.querySelectorAll('#specAccordion .accordion-item').forEach(i => i.setAttribute('data-open', 'true'));
+    document.body.classList.add('print-specs-only');
+    window.print();
+    setTimeout(() => document.body.classList.remove('print-specs-only'), 500);
+  });
+
+  /* ---------- Sample request modal (multi-step) ---------- */
+  const sampleOverlay = document.getElementById('sampleOverlay');
+  const sampleForm = document.getElementById('sampleForm');
+  let currentStep = 1;
+  const totalSteps = 3;
+
+  function renderSampleReview() {
+    const list = document.getElementById('sampleReviewList');
+    const empty = document.getElementById('sampleEmptyMsg');
+    const codes = [...tray];
+    list.innerHTML = '';
+    empty.classList.toggle('hidden', codes.length > 0);
+    codes.forEach(code => {
+      const p = findProduct(code);
+      const li = document.createElement('li');
+      li.className = 'flex items-center justify-between py-3';
+      li.innerHTML = `
+        <span class="text-sm text-stonedark"><span class="code-chip text-brass mr-2">${code}</span>${p ? p.name : ''}</span>
+        <button type="button" data-remove-code="${code}" class="text-xs text-muted hover:text-stonedark underline underline-offset-2">Remove</button>
+      `;
+      list.appendChild(li);
+    });
+    list.querySelectorAll('[data-remove-code]').forEach(b => {
+      b.addEventListener('click', () => {
+        tray.delete(b.dataset.removeCode);
+        updateTrayUI();
+        renderSampleReview();
+        renderProducts(document.querySelector('#products .chip-btn[aria-pressed="true"]').dataset.filter);
+      });
+    });
+  }
+
+  function goToStep(n) {
+    currentStep = Math.min(Math.max(n, 1), totalSteps);
+    sampleForm.querySelectorAll('.form-step').forEach(el => {
+      el.classList.toggle('hidden', Number(el.dataset.formStep) !== currentStep);
+    });
+    document.getElementById('stepFill').style.width = `${((currentStep - 1) / (totalSteps - 1)) * 100}%`;
+    document.getElementById('stepBack').disabled = currentStep === 1;
+    document.getElementById('stepNext').classList.toggle('hidden', currentStep === totalSteps);
+    document.getElementById('stepSubmit').classList.toggle('hidden', currentStep !== totalSteps);
+    document.querySelectorAll('[data-step-label]').forEach(el => {
+      el.classList.toggle('text-stonedark', Number(el.dataset.stepLabel) <= currentStep);
+      el.classList.toggle('text-muted', Number(el.dataset.stepLabel) > currentStep);
+    });
+  }
+
+  function openSampleModal() {
+    renderSampleReview();
+    goToStep(1);
+    sampleOverlay.hidden = false;
+    requestAnimationFrame(() => sampleOverlay.classList.add('is-open'));
+    document.body.classList.add('modal-open');
+  }
+
+  function closeSampleModal() {
+    sampleOverlay.classList.remove('is-open');
+    document.body.classList.remove('modal-open');
+    setTimeout(() => { sampleOverlay.hidden = true; }, 400);
+  }
+
+  document.querySelectorAll('[data-close-modal]').forEach(el => el.addEventListener('click', closeSampleModal));
+  document.getElementById('stepNext').addEventListener('click', () => goToStep(currentStep + 1));
+  document.getElementById('stepBack').addEventListener('click', () => goToStep(currentStep - 1));
+
+  // Native form POST — not intercepted. Update the hidden sample_codes field right before submit.
+  sampleForm.addEventListener('submit', () => {
+    document.getElementById('sampleCodesInput').value = [...tray].join(', ');
+  });
+
+  /* ---------- Contact form -> mailto ---------- */
   document.getElementById('contactForm').addEventListener('submit', function (e) {
     e.preventDefault();
     const name = document.getElementById('name').value;
@@ -536,6 +997,16 @@
     const subject = encodeURIComponent('Website inquiry — ' + interest);
     const body = encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nInterested in: ${interest}\n\n${message}`);
     window.location.href = `mailto:info@stoneplast.ir?subject=${subject}&body=${body}`;
+  });
+
+  /* ---------- Init ---------- */
+  updateTrayUI();
+
+  /* Escape key closes any open overlay */
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (!productOverlay.hidden) closeDrawer();
+    if (!sampleOverlay.hidden) closeSampleModal();
   });
 </script>
 

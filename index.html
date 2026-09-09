@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stone Plast — Decorative PVC Marble Sheets</title>
+<title>Stone Plast: Decorative PVC Marble Sheets</title>
 <meta name="description" content="Stone Plast manufactures fire-rated, antibacterial PVC marble sheets and accessories in Tehran, Iran. Explore 90+ patterns, compare against natural stone, and request samples.">
 
 <script src="https://cdn.tailwindcss.com"></script>
@@ -110,14 +110,6 @@
   #trayDock { transform: translateY(120%); transition: transform .45s cubic-bezier(0.16, 1, 0.3, 1); }
   #trayDock.is-visible { transform: translateY(0); }
 
-  @media print {
-    body.print-specs-only > *:not(#assurance) { display: none !important; }
-    body.print-specs-only #assurance { background: #fff !important; color: #15181A !important; padding: 0 !important; }
-    body.print-specs-only #assurance * { color: #15181A !important; }
-    body.print-specs-only #assurance .accordion-body { grid-template-rows: 1fr !important; }
-    body.print-specs-only #assurance .accordion-chevron { display: none; }
-  }
-
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .sample-card, .chip-btn, .sample-img, .hero-img, .drawer-panel, .modal-panel, #trayDock, .accordion-body { transition: none !important; }
@@ -137,6 +129,7 @@
   <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
     <a href="#top" class="flex items-center gap-2 shrink-0">
       <span class="font-display text-xl sm:text-2xl tracking-tight text-stonedark">Stone<span class="text-teal">·</span>Plast</span>
+      <img src="https://stoneplast.co/wp-content/uploads/2024/02/favicon-stone-plast.png" alt="Stone Plast logo" class="h-6 w-6 sm:h-7 sm:w-7 object-contain">
     </a>
 
     <nav class="hidden md:flex items-center gap-7 text-sm text-ink/80">
@@ -184,7 +177,7 @@
         Marble&rsquo;s look, without marble&rsquo;s weight or upkeep.
       </h1>
       <p class="mt-6 text-lg text-ink/75 leading-relaxed max-w-lg">
-        Stone Plast manufactures decorative PVC marble sheeting in full original size &mdash; fire-rated, antibacterial, and cut from a working range of more than 90 patterns and solid colors. Browse the collection, compare it against stone and tile, then request the samples that fit your project.
+        Stone Plast manufactures decorative PVC marble sheeting in full original size, fire-rated, antibacterial, and cut from a working range of more than 90 patterns and solid colors. Browse the collection, compare it against stone and tile, then request the samples that fit your project.
       </p>
 
       <div class="mt-9 flex flex-wrap items-center gap-4">
@@ -238,10 +231,6 @@
     <div class="max-w-2xl">
       <h2 class="font-display text-3xl sm:text-4xl leading-tight">Tested, and paperwork to prove it</h2>
       <p class="mt-4 text-paper/70 leading-relaxed">Every Stone Plast sheet is produced to the same specification that went through independent testing. Expand either card for the full lab summary.</p>
-      <button type="button" id="downloadSpecBtn" class="mt-6 inline-flex items-center gap-2 text-sm text-brass hover:text-paper border border-brass/40 hover:border-brass px-4 py-2.5 transition-colors">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
-        Download spec sheet (PDF)
-      </button>
     </div>
 
     <div class="mt-14 grid lg:grid-cols-12 border-t border-l border-paper/15" id="specAccordion">
@@ -256,7 +245,19 @@
         </button>
         <div class="accordion-body px-8 sm:px-10">
           <div>
-            <p class="text-sm text-paper/65 leading-relaxed max-w-md pb-8">Reaction-to-fire classified under EN 13501&#8209;1 and Iranian National Standard 8299&#8209;1 by the Road, Housing &amp; Urban Development Research Center. Classification covers flame spread, heat release and smoke production (s2) with no flaming droplets (d0) &mdash; the profile specified for wall linings in occupied commercial interiors.</p>
+            <p class="text-sm text-paper/65 leading-relaxed max-w-md">Reaction-to-fire classified under EN 13501&#8209;1 and Iranian National Standard 8299&#8209;1 by the Road, Housing &amp; Urban Development Research Center. Classification covers flame spread, heat release and smoke production (s2) with no flaming droplets (d0), the profile specified for wall linings in occupied commercial interiors.</p>
+
+            <div class="mt-6 space-y-4 pb-8">
+              <a href="images/cert-fire-report-cover.png" target="_blank" rel="noopener" class="block border border-paper/20 hover:border-brass transition-colors">
+                <img src="images/cert-fire-report-cover.png" alt="Fire classification test report cover page, Road, Housing & Urban Development Research Center" loading="lazy" decoding="async" class="w-full h-auto">
+              </a>
+              <a href="images/cert-fire-test-photos.png" target="_blank" rel="noopener" class="block border border-paper/20 hover:border-brass transition-colors">
+                <img src="images/cert-fire-test-photos.png" alt="Fire test photographs showing flame application to Stone Plast PVC sheet samples" loading="lazy" decoding="async" class="w-full h-auto">
+              </a>
+              <a href="images/cert-fire-results-table.png" target="_blank" rel="noopener" class="block border border-paper/20 hover:border-brass transition-colors">
+                <img src="images/cert-fire-results-table.png" alt="Fire test results table confirming Stone Plast reaction-to-fire classification B-s2,d0" loading="lazy" decoding="async" class="w-full h-auto">
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -271,7 +272,13 @@
         </button>
         <div class="accordion-body px-8 sm:px-10">
           <div>
-            <p class="text-sm text-paper/65 leading-relaxed pb-8">Pasteur Institute of Iran testing against E. coli (ATCC 25922) recorded over 99.9% bacterial reduction after 24 hours of surface contact, using the same sheet finish sold across the collection &mdash; not a treated test sample.</p>
+            <p class="text-sm text-paper/65 leading-relaxed">Pasteur Institute of Iran testing against E. coli (ATCC 25922) recorded over 99.9% bacterial reduction after 24 hours of surface contact, using the same sheet finish sold across the collection, not a treated test sample.</p>
+
+            <div class="mt-6 pb-8">
+              <a href="images/cert-antibacterial-report.png" target="_blank" rel="noopener" class="block border border-paper/20 hover:border-brass transition-colors">
+                <img src="images/cert-antibacterial-report.png" alt="Pasteur Institute of Iran antibacterial test report for Stone Plast PVC sheet against E. coli ATCC 25922" loading="lazy" decoding="async" class="w-full h-auto">
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -322,7 +329,7 @@
   <div class="mt-16 bracket-frame bracket-sm border border-brass/30 px-6 py-8 sm:px-10 sm:py-9 flex flex-col sm:flex-row items-center justify-between gap-6">
     <div>
       <h3 class="font-display text-xl text-stonedark">This is a sample of the range</h3>
-      <p class="text-sm text-ink/70 mt-1.5">80+ additional patterns and colors are available in the full sample book &mdash; call or write in and we&rsquo;ll send options for your project.</p>
+      <p class="text-sm text-ink/70 mt-1.5">80+ additional patterns and colors are available in the full sample book. Call or write in and we&rsquo;ll send options for your project.</p>
     </div>
     <a href="#contact" class="shrink-0 inline-flex items-center gap-2 bg-stonedark text-paper font-medium px-6 py-3 border border-stonedark hover:bg-teal hover:border-teal transition-colors">Request the sample book</a>
   </div>
@@ -333,7 +340,7 @@
   <div class="max-w-7xl mx-auto">
     <div class="max-w-2xl mb-12">
       <h2 class="font-display text-3xl sm:text-4xl leading-tight text-stonedark">How it stacks up</h2>
-      <p class="mt-4 text-ink/70 leading-relaxed">A general comparison against natural marble slab and ceramic tile, based on typical installations. Exact figures vary by supplier and project &mdash; ask your contractor for slab- or tile-specific numbers.</p>
+      <p class="mt-4 text-ink/70 leading-relaxed">A general comparison against natural marble slab and ceramic tile, based on typical installations. Exact figures vary by supplier and project. Ask your contractor for slab- or tile-specific numbers.</p>
     </div>
 
     <div class="overflow-x-auto">
@@ -427,7 +434,7 @@
 
     <div class="lg:col-span-5">
       <h2 class="font-display text-3xl sm:text-4xl leading-tight text-stonedark">Talk to Stone Plast</h2>
-      <p class="mt-4 text-ink/70 leading-relaxed max-w-md">Call the numbers below for pricing, samples or project quantities &mdash; every line is answered from our Tehran office.</p>
+      <p class="mt-4 text-ink/70 leading-relaxed max-w-md">Call the numbers below for pricing, samples or project quantities. Every line is answered from our Tehran office.</p>
 
       <div class="mt-9 space-y-5">
         <a href="tel:02122537365" class="flex items-center gap-4 group">
@@ -496,7 +503,7 @@
         </div>
         <div>
           <label for="message" class="block text-sm font-medium text-stonedark mb-1.5">Message</label>
-          <textarea id="message" name="message" rows="4" required class="w-full border border-stonedark/20 px-4 py-2.5 text-sm focus:border-teal outline-none" placeholder="Tell us about the project — surface area, location, timeline."></textarea>
+          <textarea id="message" name="message" rows="4" required class="w-full border border-stonedark/20 px-4 py-2.5 text-sm focus:border-teal outline-none" placeholder="Tell us about the project: surface area, location, timeline."></textarea>
         </div>
         <button type="submit" id="contactSubmitBtn" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-teal text-white font-medium px-7 py-3.5 border border-teal hover:bg-teal-deep hover:border-teal-deep transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
           <span id="contactSubmitLabel">Send message</span>
@@ -536,7 +543,7 @@
       </div>
     </div>
     <div class="pt-6 flex flex-col sm:flex-row justify-between gap-3 text-xs text-paper/50">
-      <p>&copy; <span id="year"></span> Stone Plast — Baspar Shimi Shahin Co. All rights reserved.</p>
+      <p>&copy; <span id="year"></span> Stone Plast, Baspar Shimi Shahin Co. All rights reserved.</p>
       <p>Shenzar Industrial Zone · South Ostad Hasan Banna St, Tehran</p>
     </div>
   </div>
@@ -631,7 +638,7 @@
         <div class="form-step" data-form-step="1">
           <p class="text-sm text-ink/70 mb-4">These are the patterns you've selected. Remove any you don't need, or head back to the collection to add more.</p>
           <ul id="sampleReviewList" class="divide-y divide-stonedark/10 border-y border-stonedark/10"></ul>
-          <p id="sampleEmptyMsg" class="text-sm text-muted py-6 hidden">No samples selected yet — close this and tap a swatch to add one.</p>
+          <p id="sampleEmptyMsg" class="text-sm text-muted py-6 hidden">No samples selected yet. Close this and tap a swatch to add one.</p>
         </div>
 
         <div class="form-step hidden" data-form-step="2">
@@ -702,6 +709,16 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  /* ---------- Logo/wordmark link: force scroll-to-top ----------
+     The link targets #top, but the header itself carries id="top" and is
+     position:fixed, so its on-screen position never changes, and the browser's
+     native anchor-jump sees "already there" and does nothing. Handle it
+     manually instead. */
+  document.querySelector('a[href="#top"]').addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
   /* ---------- Mobile menu ---------- */
   const menuBtn = document.getElementById('menuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
@@ -750,11 +767,11 @@
   };
 
   const COMPARISON_ROWS = [
-    { label: 'Weight',              sp: 'Light — 6.4 kg/m²',          marble: 'Heavy — often 25–40 kg/m² slab', tile: 'Moderate — varies by format' },
-    { label: 'Installation time',   sp: 'Fast — full sheets, few seams', marble: 'Slow — cutting, fitting, polishing', tile: 'Moderate — tile-by-tile, grouting' },
-    { label: 'Moisture resistance', sp: 'High — no sealing needed',    marble: 'Needs periodic sealing',          tile: 'Good, if grout is maintained' },
+    { label: 'Weight',              sp: 'Light: 6.4 kg/m²',          marble: 'Heavy: often 25–40 kg/m² slab', tile: 'Moderate: varies by format' },
+    { label: 'Installation time',   sp: 'Fast: full sheets, few seams', marble: 'Slow: cutting, fitting, polishing', tile: 'Moderate: tile-by-tile, grouting' },
+    { label: 'Moisture resistance', sp: 'High: no sealing needed',    marble: 'Needs periodic sealing',          tile: 'Good, if grout is maintained' },
     { label: 'Fire class',          sp: 'B-s2,d0 (EN 13501-1)',        marble: 'Non-combustible, but heavy',      tile: 'Non-combustible, but rigid' },
-    { label: 'Relative cost',       sp: 'Lower material + labour',     marble: 'Highest — material and install',  tile: 'Mid-range — labour intensive' },
+    { label: 'Relative cost',       sp: 'Lower material + labour',     marble: 'Highest: material and install',  tile: 'Mid-range: labour intensive' },
   ];
 
   /* ---------- Sample tray state ---------- */
@@ -798,7 +815,7 @@
         <div class="bracket-frame-inner aspect-[4/5] overflow-hidden bg-stonedark/5">
           <picture>
             <source srcset="${p.img.replace(/\.jpg$/, '.webp')}" type="image/webp">
-            <img src="${p.img}" alt="${p.name} — Stone Plast PVC marble sheet, code ${p.code}" loading="lazy" decoding="async" class="sample-img w-full h-full object-cover">
+            <img src="${p.img}" alt="${p.name}, Stone Plast PVC marble sheet, code ${p.code}" loading="lazy" decoding="async" class="sample-img w-full h-full object-cover">
           </picture>
         </div>
         <div class="flex items-center justify-between pt-3">
@@ -832,7 +849,7 @@
   function setDrawerButtonState(code) {
     const btn = document.getElementById('drawerAddBtn');
     if (tray.has(code)) {
-      btn.textContent = 'Added — remove from request';
+      btn.textContent = 'Added (remove from request)';
       btn.classList.add('bg-teal-deep', 'border-teal-deep');
     } else {
       btn.textContent = 'Add to Sample Request';
@@ -845,7 +862,7 @@
     if (!p) return;
     currentDrawerCode = code;
     document.getElementById('drawerImg').src = p.img;
-    document.getElementById('drawerImg').alt = `${p.name} — Stone Plast PVC marble sheet, code ${p.code}`;
+    document.getElementById('drawerImg').alt = `${p.name}, Stone Plast PVC marble sheet, code ${p.code}`;
     document.getElementById('drawerImgWebp').srcset = p.img.replace(/\.jpg$/, '.webp');
     document.getElementById('drawerCode').textContent = p.code;
     document.getElementById('drawerName').textContent = p.name;
@@ -890,7 +907,7 @@
     const app = APPLICATIONS[id];
     const p = findProduct(app.code);
     document.getElementById('appImage').src = p.img;
-    document.getElementById('appImage').alt = `${p.name} — Stone Plast PVC marble sheet, code ${p.code}`;
+    document.getElementById('appImage').alt = `${p.name}, Stone Plast PVC marble sheet, code ${p.code}`;
     document.getElementById('appPatternCode').textContent = p.code;
     document.getElementById('appPatternName').textContent = p.name;
     document.getElementById('appCopy').textContent = app.copy;
@@ -912,14 +929,6 @@
       const open = item.getAttribute('data-open') === 'true';
       item.setAttribute('data-open', String(!open));
     });
-  });
-
-  /* ---------- Download spec sheet ---------- */
-  document.getElementById('downloadSpecBtn').addEventListener('click', () => {
-    document.querySelectorAll('#specAccordion .accordion-item').forEach(i => i.setAttribute('data-open', 'true'));
-    document.body.classList.add('print-specs-only');
-    window.print();
-    setTimeout(() => document.body.classList.remove('print-specs-only'), 500);
   });
 
   /* ---------- Sample request modal (multi-step) ---------- */
@@ -1050,7 +1059,7 @@
     const result = await submitForm('sample', fields);
 
     if (result.ok) {
-      status.textContent = 'Request sent — we\u2019ll be in touch shortly.';
+      status.textContent = 'Request sent. We\u2019ll be in touch shortly.';
       status.classList.add('text-teal-deep');
       sampleForm.reset();
       tray.clear();
@@ -1089,7 +1098,7 @@
     const result = await submitForm('contact', fields);
 
     if (result.ok) {
-      status.textContent = 'Message sent — we\u2019ll be in touch shortly.';
+      status.textContent = 'Message sent. We\u2019ll be in touch shortly.';
       status.classList.add('text-teal-deep');
       document.getElementById('contactForm').reset();
       submitLabel.textContent = 'Send message';

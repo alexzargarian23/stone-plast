@@ -1,0 +1,9 @@
+{
+  "name": "stoneplast-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Stone Plast landing page with a Vercel serverless email endpoint",
+  "dependencies": {
+    "nodemailer": "^6.9.14"
+  }
+}

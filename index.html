@@ -419,15 +419,6 @@
       <p class="mt-4 text-ink/70 leading-relaxed max-w-md">Call the numbers below for pricing, samples or project quantities &mdash; every line is answered from our Tehran office.</p>
 
       <div class="mt-9 space-y-5">
-        <a href="tel:02138992" class="flex items-center gap-4 group">
-          <span class="w-11 h-11 border border-teal-deep/40 flex items-center justify-center text-teal-deep shrink-0">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </span>
-          <span>
-            <span class="block text-stonedark font-medium group-hover:text-teal transition-colors">021 38992</span>
-            <span class="block text-xs text-muted">Main line</span>
-          </span>
-        </a>
         <a href="tel:02122537365" class="flex items-center gap-4 group">
           <span class="w-11 h-11 border border-teal-deep/40 flex items-center justify-center text-teal-deep shrink-0">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -465,17 +456,13 @@
             Sales office
           </span>
         </div>
-        <a href="https://stoneplast.ir" target="_blank" rel="noopener" class="flex items-center gap-4 group">
-          <span class="w-11 h-11 border border-teal-deep/40 flex items-center justify-center text-teal-deep shrink-0">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          </span>
-          <span class="block text-stonedark font-medium group-hover:text-teal transition-colors">stoneplast.ir</span>
-        </a>
       </div>
     </div>
 
     <div class="lg:col-span-7">
       <form id="contactForm" class="bracket-frame bracket-sm bg-white border border-stonedark/15 p-7 sm:p-10 space-y-5">
+        <!-- Honeypot: hidden from real visitors, bots often fill every field -->
+        <input type="text" name="company" id="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
         <div class="grid sm:grid-cols-2 gap-5">
           <div>
             <label for="name" class="block text-sm font-medium text-stonedark mb-1.5">Name</label>
@@ -500,10 +487,10 @@
           <label for="message" class="block text-sm font-medium text-stonedark mb-1.5">Message</label>
           <textarea id="message" name="message" rows="4" required class="w-full border border-stonedark/20 px-4 py-2.5 text-sm focus:border-teal outline-none" placeholder="Tell us about the project — surface area, location, timeline."></textarea>
         </div>
-        <button type="submit" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-teal text-white font-medium px-7 py-3.5 border border-teal hover:bg-teal-deep hover:border-teal-deep transition-colors">
-          Send message
+        <button type="submit" id="contactSubmitBtn" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-teal text-white font-medium px-7 py-3.5 border border-teal hover:bg-teal-deep hover:border-teal-deep transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
+          <span id="contactSubmitLabel">Send message</span>
         </button>
-        <p class="text-xs text-muted">Sending opens your email app addressed to info@stoneplast.ir with these details filled in.</p>
+        <p id="contactStatus" class="text-xs" role="status" aria-live="polite"></p>
       </form>
     </div>
 
@@ -622,9 +609,10 @@
         </div>
       </div>
 
-      <!-- Replace this action URL with your order-processing endpoint. Standard HTML form POST — no JS interception on submit. -->
-      <form id="sampleForm" action="#" method="POST">
+      <form id="sampleForm">
         <input type="hidden" name="sample_codes" id="sampleCodesInput">
+        <!-- Honeypot: hidden from real visitors, bots often fill every field -->
+        <input type="text" name="company" id="sampleCompany" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
 
         <div class="form-step" data-form-step="1">
           <p class="text-sm text-ink/70 mb-4">These are the patterns you've selected. Remove any you don't need, or head back to the collection to add more.</p>
@@ -681,11 +669,15 @@
           </div>
         </div>
 
-        <div class="mt-8 flex items-center justify-between gap-4">
+        <p id="sampleStatus" class="text-xs mt-4" role="status" aria-live="polite"></p>
+
+        <div class="mt-4 flex items-center justify-between gap-4">
           <button type="button" id="stepBack" class="text-sm text-stonedark hover:text-teal disabled:opacity-0 disabled:pointer-events-none">&larr; Back</button>
           <div class="flex gap-3">
             <button type="button" id="stepNext" class="bg-stonedark text-paper font-medium px-6 py-3 border border-stonedark hover:bg-teal hover:border-teal transition-colors">Next</button>
-            <button type="submit" id="stepSubmit" class="hidden bg-teal text-white font-medium px-6 py-3 border border-teal hover:bg-teal-deep hover:border-teal-deep transition-colors">Submit request</button>
+            <button type="submit" id="stepSubmit" class="hidden bg-teal text-white font-medium px-6 py-3 border border-teal hover:bg-teal-deep hover:border-teal-deep transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
+              <span id="stepSubmitLabel">Submit request</span>
+            </button>
           </div>
         </div>
       </form>
@@ -765,7 +757,6 @@
     document.getElementById('trayDock').classList.toggle('is-visible', count > 0);
     document.getElementById('sampleCodesInput').value = codes.join(', ');
 
-    // sync drawer add button if a product's drawer happens to be open
     if (currentDrawerCode) setDrawerButtonState(currentDrawerCode);
   }
 
@@ -905,7 +896,7 @@
     });
   });
 
-  /* ---------- Download spec sheet (scoped browser print, no library) ---------- */
+  /* ---------- Download spec sheet ---------- */
   document.getElementById('downloadSpecBtn').addEventListener('click', () => {
     document.querySelectorAll('#specAccordion .accordion-item').forEach(i => i.setAttribute('data-open', 'true'));
     document.body.classList.add('print-specs-only');
@@ -945,6 +936,19 @@
     });
   }
 
+  /* Validate only the fields visible in the current step, since hidden
+     required fields in later/earlier steps would otherwise silently
+     block the native submit event from ever firing. */
+  function validateStep(n) {
+    const stepEl = sampleForm.querySelector(`[data-form-step="${n}"]`);
+    const invalid = stepEl.querySelector(':invalid');
+    if (invalid) {
+      invalid.reportValidity();
+      return false;
+    }
+    return true;
+  }
+
   function goToStep(n) {
     currentStep = Math.min(Math.max(n, 1), totalSteps);
     sampleForm.querySelectorAll('.form-step').forEach(el => {
@@ -975,24 +979,109 @@
   }
 
   document.querySelectorAll('[data-close-modal]').forEach(el => el.addEventListener('click', closeSampleModal));
-  document.getElementById('stepNext').addEventListener('click', () => goToStep(currentStep + 1));
+  document.getElementById('stepNext').addEventListener('click', () => {
+    if (!validateStep(currentStep)) return;
+    goToStep(currentStep + 1);
+  });
   document.getElementById('stepBack').addEventListener('click', () => goToStep(currentStep - 1));
 
-  // Native form POST — not intercepted. Update the hidden sample_codes field right before submit.
-  sampleForm.addEventListener('submit', () => {
-    document.getElementById('sampleCodesInput').value = [...tray].join(', ');
+  /* Posts to the /api/send serverless function. Returns { ok, error? }. */
+  async function submitForm(type, fields) {
+    try {
+      const res = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type, fields }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        return { ok: false, error: data.error || 'Something went wrong. Please try again or call us directly.' };
+      }
+      return { ok: true };
+    } catch (err) {
+      return { ok: false, error: 'Network error. Please check your connection and try again.' };
+    }
+  }
+
+  // Sample form submit -> POST to serverless function
+  sampleForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    if (!validateStep(currentStep)) return;
+
+    const fields = {
+      name: document.getElementById('reqName').value,
+      email: document.getElementById('reqEmail').value,
+      phone: document.getElementById('reqPhone').value,
+      projectType: document.getElementById('reqType').value,
+      notes: document.getElementById('reqNotes').value,
+      address: document.getElementById('reqAddress').value,
+      city: document.getElementById('reqCity').value,
+      postalCode: document.getElementById('reqPostal').value,
+      sampleCodes: [...tray].join(', '),
+      company: document.getElementById('sampleCompany').value, // honeypot
+    };
+
+    const submitBtn = document.getElementById('stepSubmit');
+    const submitLabel = document.getElementById('stepSubmitLabel');
+    const status = document.getElementById('sampleStatus');
+    submitBtn.disabled = true;
+    submitLabel.textContent = 'Sending…';
+    status.textContent = '';
+    status.className = 'text-xs mt-4';
+
+    const result = await submitForm('sample', fields);
+
+    if (result.ok) {
+      status.textContent = 'Request sent — we\u2019ll be in touch shortly.';
+      status.classList.add('text-teal-deep');
+      sampleForm.reset();
+      tray.clear();
+      updateTrayUI();
+      renderSampleReview();
+      renderProducts(document.querySelector('#products .chip-btn[aria-pressed="true"]').dataset.filter);
+      setTimeout(closeSampleModal, 1800);
+    } else {
+      status.textContent = result.error;
+      status.classList.add('text-red-600');
+      submitBtn.disabled = false;
+      submitLabel.textContent = 'Submit request';
+    }
   });
 
-  /* ---------- Contact form -> mailto ---------- */
-  document.getElementById('contactForm').addEventListener('submit', function (e) {
+  /* ---------- Contact form -> POST to serverless function ---------- */
+  document.getElementById('contactForm').addEventListener('submit', async function (e) {
     e.preventDefault();
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const interest = document.getElementById('interest').value;
-    const message = document.getElementById('message').value;
-    const subject = encodeURIComponent('Website inquiry — ' + interest);
-    const body = encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nInterested in: ${interest}\n\n${message}`);
-    window.location.href = `mailto:info@stoneplast.ir?subject=${subject}&body=${body}`;
+
+    const fields = {
+      name: document.getElementById('name').value,
+      phone: document.getElementById('phone').value,
+      interest: document.getElementById('interest').value,
+      message: document.getElementById('message').value,
+      company: document.getElementById('company').value, // honeypot
+    };
+
+    const submitBtn = document.getElementById('contactSubmitBtn');
+    const submitLabel = document.getElementById('contactSubmitLabel');
+    const status = document.getElementById('contactStatus');
+    submitBtn.disabled = true;
+    submitLabel.textContent = 'Sending…';
+    status.textContent = '';
+    status.className = 'text-xs';
+
+    const result = await submitForm('contact', fields);
+
+    if (result.ok) {
+      status.textContent = 'Message sent — we\u2019ll be in touch shortly.';
+      status.classList.add('text-teal-deep');
+      document.getElementById('contactForm').reset();
+      submitLabel.textContent = 'Send message';
+      setTimeout(() => { submitBtn.disabled = false; }, 1500);
+    } else {
+      status.textContent = result.error;
+      status.classList.add('text-red-600');
+      submitBtn.disabled = false;
+      submitLabel.textContent = 'Send message';
+    }
   });
 
   /* ---------- Init ---------- */

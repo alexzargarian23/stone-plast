@@ -10,6 +10,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="images/product-63.webp" imagesrcset="images/product-63.webp" type="image/webp">
+<link rel="preload" as="image" href="images/product-08.webp" imagesrcset="images/product-08.webp" type="image/webp">
 
 <script>
   tailwind.config = {
@@ -213,10 +215,16 @@
     <div class="lg:col-span-6 relative">
       <div class="relative h-[420px] sm:h-[480px] lg:h-[540px]">
         <div class="hero-frame bracket-frame absolute w-[62%] top-0 left-0 aspect-[4/5] overflow-hidden">
-          <img src="images/product-63.jpg" alt="Stone Plast amber and copper marble-pattern PVC sheet sample, code DF-90533-A" class="hero-img w-full h-full object-cover bracket-frame-inner">
+          <picture>
+            <source srcset="images/product-63.webp" type="image/webp">
+            <img src="images/product-63.jpg" alt="Stone Plast amber and copper marble-pattern PVC sheet sample, code DF-90533-A" class="hero-img w-full h-full object-cover bracket-frame-inner" fetchpriority="high" decoding="async">
+          </picture>
         </div>
         <div class="hero-frame bracket-frame absolute w-[52%] bottom-0 right-0 aspect-[4/5] overflow-hidden">
-          <img src="images/product-08.jpg" alt="Stone Plast black marble-pattern PVC sheet sample with white veining, code DF-1426-E" class="hero-img w-full h-full object-cover bracket-frame-inner">
+          <picture>
+            <source srcset="images/product-08.webp" type="image/webp">
+            <img src="images/product-08.jpg" alt="Stone Plast black marble-pattern PVC sheet sample with white veining, code DF-1426-E" class="hero-img w-full h-full object-cover bracket-frame-inner" fetchpriority="high" decoding="async">
+          </picture>
         </div>
       </div>
     </div>
@@ -361,7 +369,10 @@
   <div class="grid lg:grid-cols-12 gap-10 items-center">
     <div class="lg:col-span-6 bracket-frame">
       <div class="aspect-[4/5] overflow-hidden bracket-frame-inner">
-        <img id="appImage" src="images/product-08.jpg" alt="" class="w-full h-full object-cover">
+        <picture>
+          <source id="appImageWebp" srcset="images/product-08.webp" type="image/webp">
+          <img id="appImage" src="images/product-08.jpg" alt="" class="w-full h-full object-cover" decoding="async">
+        </picture>
       </div>
     </div>
     <div class="lg:col-span-6">
@@ -557,7 +568,10 @@
 
       <div class="bracket-frame bracket-sm">
         <div class="aspect-[4/5] overflow-hidden bracket-frame-inner">
-          <img id="drawerImg" src="" alt="" class="w-full h-full object-cover">
+          <picture>
+            <source id="drawerImgWebp" srcset="" type="image/webp">
+            <img id="drawerImg" src="" alt="" class="w-full h-full object-cover" decoding="async">
+          </picture>
         </div>
       </div>
 
@@ -782,7 +796,10 @@
       card.setAttribute('data-code', p.code);
       card.innerHTML = `
         <div class="bracket-frame-inner aspect-[4/5] overflow-hidden bg-stonedark/5">
-          <img src="${p.img}" alt="${p.name} — Stone Plast PVC marble sheet, code ${p.code}" loading="lazy" class="sample-img w-full h-full object-cover">
+          <picture>
+            <source srcset="${p.img.replace(/\.jpg$/, '.webp')}" type="image/webp">
+            <img src="${p.img}" alt="${p.name} — Stone Plast PVC marble sheet, code ${p.code}" loading="lazy" decoding="async" class="sample-img w-full h-full object-cover">
+          </picture>
         </div>
         <div class="flex items-center justify-between pt-3">
           <div>
@@ -829,6 +846,7 @@
     currentDrawerCode = code;
     document.getElementById('drawerImg').src = p.img;
     document.getElementById('drawerImg').alt = `${p.name} — Stone Plast PVC marble sheet, code ${p.code}`;
+    document.getElementById('drawerImgWebp').srcset = p.img.replace(/\.jpg$/, '.webp');
     document.getElementById('drawerCode').textContent = p.code;
     document.getElementById('drawerName').textContent = p.name;
     document.getElementById('drawerBlurb').textContent = p.blurb;
